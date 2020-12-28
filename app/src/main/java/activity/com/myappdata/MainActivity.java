@@ -82,3 +82,4 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 }
+//  git remote add dev git@github.com:xxx/xxx.git
