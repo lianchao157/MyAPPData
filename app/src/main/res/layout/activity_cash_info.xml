@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.CashInfoActivity">
+
+    <LinearLayout
+        android:id="@+id/linlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"></LinearLayout>
+
+    <Button
+        android:id="@+id/tvnetaction"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:text="netaction" />
+
+    <Button
+        android:id="@+id/postactiong"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:text="Post" />
+
+
+    <Button
+        android:id="@+id/putaction"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:text="PUT" />
+
+
+
+    <Button
+        android:id="@+id/testaction"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        android:text="Teset" />
+
+
+    <Button
+        android:id="@+id/gsonjiexi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="gson解析按钮"
+
+        />
+
+
+    <Button
+        android:id="@+id/shezhishujujiexi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="设置数据解析器"
+
+        />
+</LinearLayout>

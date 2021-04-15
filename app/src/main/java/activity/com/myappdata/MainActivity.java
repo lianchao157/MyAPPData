@@ -10,8 +10,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import activity.com.myappdata.activity.ChangeTypeActivity;
 import activity.com.myappdata.adapter.Gridviewadapter;
 import activity.com.myappdata.entity.GridvieMenumEntity;
+import activity.com.myappdata.widgets.MyLogcat;
 
 //http://111.160.42.163:8801/#/system/users
 
@@ -55,6 +57,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         loadData();
         tvmainmenum = (TextView) findViewById(R.id.tvmainmenum);
         tvmainmenum.setOnClickListener(this);
+        //  开启服务线程  写入日志log
+
+
     }
 
     private void loadData() {
@@ -75,7 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 ) {
 
             case R.id.tvmainmenum:
-                Intent intent = new Intent(MainActivity.this, MenumActivity.class);
+                Intent intent = new Intent(MainActivity.this, ChangeTypeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
@@ -83,3 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 }
 //  git remote add dev git@github.com:xxx/xxx.git
+
+
+//    git config -–global user.name "lianchaolc"
+//        git config –-global user.email "15642926631@163.com"

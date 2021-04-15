@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:padding="10px">
+
+    <ImageView
+        android:id="@+id/bf_recycleview_itemiv"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_weight="1"
+        android:src="@drawable/icon_bd_72" />
+
+    <TextView
+        android:id="@+id/bf_recycleview_itemtv"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:text="天猫新品"
+        android:textColor="@color/black"
+        android:textSize="30px" />
+</LinearLayout>

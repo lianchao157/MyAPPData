@@ -6,6 +6,45 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <!--<style name="AppBaseTheme1" parent="android:Theme.Light">-->
+    <!--&lt;!&ndash;-->
+    <!--Theme customizations available in newer API levels can go in-->
+    <!--res/values-vXX/styles.xml, while customizations related to-->
+    <!--backward-compatibility can go here.-->
+    <!--&ndash;&gt;-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash; Application theme. &ndash;&gt;-->
+    <!--<style name="AppThem1e" parent="AppBaseTheme1">-->
+    <!--&lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;-->
+    <!--</style>-->
+
+
+    <!--自定义的进度条-->
+    <style name="ProgressBar_Gray" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">50dip</item>
+        <item name="android:minHeight">8dip</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:progressDrawable">@drawable/progress_bar</item>
     </style>
 
+
+
+
+
+    <style name="AppTheme1" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--status bar color-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--window color-->
+        <item name="android:windowBackground">@color/colorBackground</item>
+    </style>
 </resources>

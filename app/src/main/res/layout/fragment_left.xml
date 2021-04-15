@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/ll_textview_time"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/green_btn_color_disable"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <Button
+            android:id="@+id/btn_tab_clock_inner_left"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/buttom_selector_bg"
+            android:paddingBottom="7dip"
+            android:paddingTop="2dip"
+            android:scaleType="matrix"
+            android:text="左边"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_tab_bell_inner_left"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/buttom_selector_bg"
+            android:paddingBottom="7dip"
+            android:paddingTop="2dip"
+            android:scaleType="matrix"
+            android:text="右边"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_left_fragment_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/ll_textview_time" />
+</RelativeLayout>
+

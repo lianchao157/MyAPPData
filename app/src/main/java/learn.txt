@@ -1,0 +1,399 @@
+1好看的菜单
+https://www.cnblogs.com/x1aolata/p/11946505.html
+https://www.cnblogs.com/x1aolata/p/11946505.html
+
+2类似   泡在网上的日子代码
+http://see-source.com/androidwidget/list.html?type=67
+
+侧边菜单
+
+3资源网站
+https://blog.csdn.net/csdn576038874/article/details/81200674
+
+
+
+
+4源码下载地址
+http://codesocang.com/gn/xiangmu/
+https://www.codesocang.com/gn/dianshang/list_420_2.html
+
+
+
+
+5 contlin  代码
+https://gitee.com/cxyzy1/tab-layout-demo
+
+bannner  设置小圆点   详细说明
+https://github.com/youth5201314/banner
+
+https://github.com/luwei2012/banner
+
+6
+仿淘宝首页功能菜单实现可动态配置的进度展现
+https://www.songma.com/news/txtlist_i61906v.html
+
+https://blog.csdn.net/qq_35605213/article/details/106494803
+
+7
+glide  加载图片解释
+https://blog.csdn.net/qq_33463102/article/details/55225816
+
+8 加了一个代码 报异常
+ java.lang.IllegalStateException: The specified child already has a parent. You must call removeView() on the child's parent first.
+ 解决方法
+https://blog.csdn.net/qq_35584878/article/details/93038872
+
+
+9  处理代码
+https://blog.csdn.net/huangxiaominglipeng/article/details/52126933
+
+2.0  升到3.0  依赖名称修改
+https://blog.csdn.net/weixin_40845165/article/details/89213528
+
+
+10  出现R文件爆红 不能运行
+
+https://blog.csdn.net/qq_22859147/article/details/105136437
+
+
+
+11  Gradle 4.10.1 requires Java 7 or later to run. You are currently using Java 6.
+
+
+
+12 相关的代码配置   ---  gradle-wrapper.properties
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+distributionUrl=https://services.gradle.org/distributions/gradle-4.4-all.zip
+
+---gradle.properties
+systemProp.https.proxyPort=8080
+systemProp.http.proxyHost=android-mirror.bugly.qq.com
+org.gradle.jvmargs=-Xmx2048m -XX\:MaxPermSize\=512m -XX\:+HeapDumpOnOutOfMemoryError -Dfile.encoding\=UTF-8
+org.gradle.daemon=true
+systemProp.https.proxyHost=android-mirror.bugly.qq.com
+systemProp.http.proxyPort=8080
+
+----  build.gradle
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    }
+
+
+
+        dependencies {
+            classpath 'com.android.tools.build:gradle:3.0.0'
+//            classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+//            classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+//
+//        //1.自动化maven打包插件
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+//        //2.自动上传至Bintray平台插件
+//        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0"
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    }
+}
+
+
+13   更改按钮选中状态
+https://blog.csdn.net/lilihong0/article/details/80927136
+
+
+14  一个页面显示多  recvcleview
+https://www.zhihu.com/question/39304525/answer/80656470
+
+
+  recyclewview  是设置  分割线   和item  间距
+
+  15 application   详解
+  https://blog.csdn.net/benbenxiongyuan/article/details/51669212
+  1  和activity和server一样是一个系统组件    用来存储 信息    需要在mainfest的application标签中进行注册  签增加个name属性把自己的 Application的名字定入即可
+
+
+  recycleview
+    使用   添加头部  和底部   的布局加载更多和刷新
+    https://blog.csdn.net/zheng_jiao/article/details/60954961?utm_medium=distribute.pc_relevant_download.none-task-blog-baidujs-1.nonecase&depth_1-utm_source=distribute.pc_relevant_download.none-task-blog-baidujs-1.nonecase
+
+
+
+
+    3   recycleview   实现  复杂布局
+
+
+    https://www.cnblogs.com/zhujiabin/p/9288437.html
+    https://www.cnblogs.com/zhujiabin/p/9288437.html
+
+
+    自定义的listview  url   解决  scrowview 嵌套  不能划定
+
+
+
+    4   Android  的 响应式布局
+    就是一个网站能够兼容多个终端——而不是为每个终端做一个特定的版本。这个概念是为解决移动互联网浏览而诞生的。
+    https://blog.csdn.net/cici_niuniu/article/details/89952331?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.control
+    和相应的githbu
+    https://github.com/google/flexbox-layout
+FlexboxLayout属性
+flexDirecition 子元素在主轴的排列方向
+app:flexDirection=”row” 默认值，水平方向，起点在左，从左到右。
+app:flexDirection=”row_reverse” 和row属性相反，水平方向，从右到左，起点在右端。
+app:flexDirection=”column” 主轴是竖直方向，起点在上端，从上到下。
+app:flexDirection=”column_reverse” 和column相反，竖直方向，起点在下方从下到上
+通过四张图的对比，是明显看出来各个属性的作用的
+
+
+    5
+    饺子视频播放器代码
+    可以完全自定义UI和任何功能
+    一行代码切换播放引擎，支持的视频格式和协议取决于播放引擎，android.media.MediaPlayer ijkplayer
+    完美检测列表滑动
+    可实现全屏播放，小窗播放
+    能在ListView、ViewPager和ListView、ViewPager和Fragment等多重嵌套模式下全屏工作
+    可以在加载、暂停、播放等各种状态中正常进入全屏和退出全屏
+    多种视频适配屏幕的方式，可铺满全屏，可以全屏剪裁
+    重力感应自动进入全屏
+    全屏后手势修改进度和音量
+    Home键退出界面暂停播放，返回界面继续播放
+    WebView嵌套本地视频控件
+    demo中添加视频缓存的例子
+
+
+    shi'p视频 地址测试
+    https://blog.csdn.net/qq_17497931/article/details/80824328
+public void cpAssertVideoToLocalPath() {
+        try {
+            InputStream myInput;
+            OutputStream myOutput = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Camera/local_video.mp4");
+            myInput = this.getAssets().open("local_video.mp4");
+            byte[] buffer = new byte[1024];
+            int length = myInput.read(buffer);
+            while (length > 0) {
+                myOutput.write(buffer, 0, length);
+                length = myInput.read(buffer);
+            }
+
+            myOutput.flush();
+            myInput.close();
+            myOutput.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+myJzvdStd.setUp(Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Camera/local_video.mp4", "饺子不信",Jzvd.SCREEN_WINDOW_NORMAL, );
+这里很多人问为什么播不了，请认真怒url，播不了就是url没怒对
+
+
+ 复制Demo中CustomMediaPlayerAssertFolder类到你的项目下
+        ----------------------------------------------------------------------------
+        JZDataSource jzDataSource = null;
+        try {
+            jzDataSource = new JZDataSource(getAssets().openFd("local_video.mp4"));
+            jzDataSource.title = "饺子快长大";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        jzvdStd.setUp(jzDataSource, JzvdStd.SCREEN_WINDOW_NORMAL);
+        Glide.with(this)
+                .load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png")
+                .into(jzvdStd.thumbImageView);
+
+        Jzvd.setMediaInterface(new CustomMediaPlayerAssertFolder());//进入此页面修改MediaInterface，让此页面的jzvd正常工作
+        -----------------------------------------------------------------------------
+
+        JzvdStd.startFullscreen(this, JzvdStd.class, VideoConstant.videoUrlList[6], "饺子辛苦了");
+        直接全屏播放
+        JzvdStd.startFullscreen(this, JzvdStd.class, VideoConstant.videoUrlList[6], "饺子辛苦了");
+        直接全屏播放
+
+        JzvdStd.startFullscreen(this, JzvdStd.class, VideoConstant.videoUrlList[6], "饺子辛苦了");
+        开启小窗播放
+
+        mJzvdStd.startWindowTiny();
+
+        列表Item划出开启小窗播放
+
+        1.Listview
+           listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+                    }
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                        Jzvd.onScrollAutoTiny(view, firstVisibleItem, visibleItemCount, totalItemCount);
+                      // Jzvd.onScrollReleaseAllVideos(view, firstVisibleItem, visibleItemCount, totalItemCount);  这是不开启列表划出小窗 同时也是画出屏幕释放JZ 划出暂停
+                    }
+                });
+        2. RecyclerView  划出列表开启小窗
+           recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+                    @Override
+                    public void onChildViewAttachedToWindow(View view) {
+                        Jzvd.onChildViewAttachedToWindow(view, R.id.videoplayer);
+                    }
+
+                    @Override
+                    public void onChildViewDetachedFromWindow(View view) {
+                        Jzvd.onChildViewDetachedFromWindow(view);
+                    }
+                });
+        2.1 RecyclerView划出屏幕释放JZ，同时也是不开启列表划出显示小窗
+            recyclerView.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+                    @Override
+                    public void onChildViewAttachedToWindow(View view) {
+
+                    }
+
+                    @Override
+                    public void onChildViewDetachedFromWindow(View view) {
+                        Jzvd jzvd = view.findViewById(R.id.videoplayer);
+                        if (jzvd != null && jzvd.jzDataSource.containsTheUrl(JZMediaManager.getCurrentUrl())) {
+                            Jzvd currentJzvd = JzvdMgr.getCurrentJzvd();
+                            if (currentJzvd != null && currentJzvd.currentScreen != Jzvd.SCREEN_WINDOW_FULLSCREEN) {
+                                Jzvd.releaseAllVideos();
+                            }
+                        }
+                    }
+                });
+
+
+  recycleview
+     混合布局
+     https://blog.csdn.net/asjqkkkk/article/details/78489245
+
+
+layout_flexBasisPercent
+layout_flexBasisPercent 属性定义了在分配多余空间之前，子元素占据的主轴空间的百分比。它的默认值为auto，即子元素的本来大小。
+
+
+类似weight
+layout_flexGrow 属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。其实就是 LinearLayout 中的weight属性，如果所有项目的layout_flexGrow 属性都为1，则它们将等分剩余空间。如果一个项目的layout_flexGrow 属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。
+
+自定义适应放大或者缩小
+layout_flexShrink 属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小（设置了换行则无效）。如果所有项目的 layout_flexShrink 属性都为1，当空间不足时，都将等比例缩小。如果一个项目的 flex-shrink 属性为0，其他项目都为1，则空间不足时，前者不缩小。负值对该属性无效。
+
+作者：锐心凌志
+链接：https://www.jianshu.com/p/5224af72987e
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+作者：锐心凌志
+链接：https://www.jianshu.com/p/5224af72987e
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+toobar
+
+
+我们从下往上说明：
+
+1.navigationBarColor:这个是控制底部导航栏背景颜色的属性，而且仅在android 5.0以上版生效，低于API 21 版本无效。
+
+2.windowBackground:顾名思义主视图窗体的背景颜色。
+
+3.ToolBar:background:工具栏ToolBar的背景颜色，只需在布局文件设置即可
+
+4.colorPrimaryDark:状态栏的背景颜色，在style.xml中设置
+
+
+
+
+
+
+android 的  流式布局
+https://blog.csdn.net/lmj623565791/article/details/38352503
+https://www.jianshu.com/p/b3a9c4a99053   //  简书  详细代码
+
+案例代码和重要
+https://blog.csdn.net/lmj623565791
+
+
+
+首次进入后 操作提示
+https://blog.csdn.net/fuweiping/article/details/8082153
+主要思想用shareprace    记录是否第一次进入程序  是则显示  操作提示的  背景 图片 不是 则记录并进行隐藏
+
+
+打包的密码都是111111
+
+https://blog.csdn.net/ffengz/article/details/52667649
+Android 开关控件Switch的简单使用
+ <Switch
+        android:id="@+id/switch_普通开关"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+ ANDROID  Dagger2从入门到放弃再到恍然大悟   依赖注入  依赖注入 依赖注入
+https://www.jianshu.com/p/39d1df6c877d
+https://github.com/thinkSky1206/MVP-Dagger2-Retrofit
+
+
+
+
+2021.3.22  mvp 实现网络请求  获取快递到哪了
+
+存在问题   实体类显示数据不全
+
+
+2021.3.22  fragmtne  的嵌套
+https://www.easck.com/cos/2019/1214/445944.shtml   三页 感觉可用
+
+
+https://blog.csdn.net/csdn_mm/article/details/80918323?utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.control&dist_request_id=&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~default-6.control
+
+2021.3.23  listview 实现  listview 拼音人民列表排序
+https://www.jianshu.com/p/b7091e43c971
+
+2021.3.23
+recycleview  实现瀑瀑流的效果
+StaggeredGridLayoutManager layout = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+rv.setLayoutManager(layout);
+
+
+
+https://blog.csdn.net/weixin_45697390/article/details/107134542   仿抖音上下滑动切换视频
+
+
+2
+https://blog.csdn.net/qq_34068563/article/details/103558295?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-10.control&dist_request_id=1328679.66031.16165007694868623&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-10.control
+
+Android 仿抖音上下滑动布局
+
+
+待做  这个个 HotFFragment   刷新组件出现报错
+
+
+databingview  可以一次性引用多个组件
+buildgradle中添加
+buildfeatures{
+viewBinding=true}
+
+在activity 中添加
+lateinit var  binding :
+作用保证初试话
+oncreate（）下
+binding=ActivityMainBinding.inflate(layoutInflater)// 膨胀扩大， 充气机
+
+xxxx
+setContentView(binding.root)
+//  发现组件
+binding.buttoncalculate.setOnclick
+
+
+上传码云代码
+https://blog.csdn.net/xiaoxiaobai250/article/details/88327061

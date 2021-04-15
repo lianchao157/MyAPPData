@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<activity.com.myappdata.typeui.blackbackgrould.GrayImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.GuideFirstActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="灰色北京的方法"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="30dp" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="鸿洋真帅"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="鸿洋真帅"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="30dp" />
+</activity.com.myappdata.typeui.blackbackgrould.GrayImageView>

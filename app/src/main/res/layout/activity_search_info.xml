@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linsearchelin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".activity.SearchInfoActivity">
+
+    <LinearLayout
+        android:id="@+id/lin_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@drawable/neterr"
+        ></LinearLayout>
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:navigationIcon="@mipmap/icon_back_32px"
+        app:subtitle="小标题"
+        app:title="大标题"></android.support.v7.widget.Toolbar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/black"></View>
+
+    <activity.com.myappdata.widgets.MyToolBar
+        android:id="@+id/my_toobar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></activity.com.myappdata.widgets.MyToolBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20px"
+        android:background="@color/black"></View>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_tab_clock"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_tab_clock"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableTop="@drawable/buttom_selector_bg"
+                android:paddingBottom="7dip"
+                android:paddingTop="2dip"
+                android:scaleType="matrix"
+                android:text="鲜抢"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_tab_bell"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_tab_bell"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableTop="@drawable/buttom_selector_bg"
+                android:paddingBottom="7dip"
+                android:paddingTop="2dip"
+                android:scaleType="matrix"
+                android:text="我的提醒"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_line1"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/ll_bottom_button"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/view_line1" />
+
+    ————————————————
+    版权声明：本文为CSDN博主「尼古拉斯阳」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+    原文链接：https://blog.csdn.net/linder_qzy/article/details/50739541
+
+</LinearLayout><!--弄一个自定义的toobar
+    ————————————————
+    版权声明：本文为CSDN博主「白僧」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+    原文链接：https://blog.csdn.net/qq_34879948/article/details/80778137
+ <activity.com.myappdata.widgets.MyToolBar
+        android:id="@+id/my_toobar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+2  fragment 嵌套
+-->

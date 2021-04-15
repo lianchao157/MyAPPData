@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="10px"
+        android:background="@drawable/buttom_selector_bg"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/recycleview_item"
+            layout="@layout/recycleview_item"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="30px"
+        android:background="@drawable/buttom_selector_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px">
+
+            <ImageView
+                android:id="@+id/xinashiqianggou"
+                android:layout_width="wrap_content"
+                android:layout_height="50px"
+                android:layout_marginTop="10px"
+                android:background="@mipmap/icon_bd_72" />
+
+            <TextView
+                android:id="@+id/tvxianshiqianggou"
+                android:layout_width="wrap_content"
+                android:layout_height="50px"
+                android:layout_marginLeft="20px"
+                android:layout_marginTop="20px"
+                android:layout_toRightOf="@+id/xinashiqianggou"
+                android:text="限时抢购"
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/more"
+                android:layout_width="wrap_content"
+                android:layout_height="50px"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20px"
+                android:text="更多>" />
+        </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_xianshiqianggou"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+
+</LinearLayout>

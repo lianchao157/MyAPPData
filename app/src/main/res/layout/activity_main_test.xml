@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.MainTestActivity">
+
+
+    <TextView
+        android:id="@+id/tvmt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1111"
+        android:textSize="30px" />
+
+
+    <TextView
+        android:id="@+id/tvmthtml"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1111"
+        android:textSize="30px" />
+
+
+    <LinearLayout
+        android:id="@+id/layadd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/flexboxlayoutmaintest"
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        app:alignContent="flex_start"
+        app:alignItems="flex_start"
+        app:flexWrap="wrap"
+        app:layout_flexGrow="2">
+
+        <Button
+            android:id="@+id/btnhedui"
+            android:layout_width="180px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="核对"
+            android:textColor="@color/black"
+            app:layout_alignSelf="center"
+            app:layout_flexGrow="1"
+            app:layout_order="1" />
+
+        <Button
+            android:id="@+id/btnhedui1"
+            android:layout_width="180px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="核对"
+            app:layout_alignSelf="center"
+            app:layout_flexGrow="1"
+            app:layout_order="2" />
+
+        <Button
+            android:id="@+id/btnhedui2"
+            android:layout_width="180px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="核对"
+            app:layout_alignSelf="center"
+            app:layout_flexGrow="1"
+            app:layout_order="1" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+</LinearLayout>

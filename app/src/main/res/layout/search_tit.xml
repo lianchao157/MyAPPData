@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="15dp">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:orientation="horizontal"
+            >
+            <RadioButton
+                android:id="@+id/rb_bank"
+                android:button="@null"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="综合排序"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/arrow1"
+                android:layout_width="15dp"
+                android:src="@mipmap/donw"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_marginLeft="2dp"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#d6d6d6"/>
+            <RadioButton
+                android:id="@+id/rb_range"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="店铺"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/arrow2"
+                android:layout_width="15dp"
+                android:src="@mipmap/donw"
+                android:layout_height="match_parent" />
+            <View
+                android:layout_marginLeft="2dp"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#d6d6d6"/>
+            <RadioButton
+                android:id="@+id/rb_money"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="销量"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/arrow3"
+                android:layout_width="15dp"
+                android:src="@mipmap/donw"
+
+                android:layout_height="match_parent" />
+            <View
+                android:layout_marginLeft="2dp"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#d6d6d6"/>
+            <RadioButton
+                android:id="@+id/rb_time"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="价格"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/arrow4"
+                android:layout_width="15dp"
+                android:src="@mipmap/donw"
+                android:layout_height="match_parent" />
+        </RadioGroup>
+
+
+</LinearLayout>
