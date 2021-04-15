@@ -12,7 +12,7 @@
             android:id="@+id/mvpteset"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="代码测试1" />
+            android:text="代码测试12" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/placerecycleview"
