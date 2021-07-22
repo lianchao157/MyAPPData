@@ -84,6 +84,8 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
 
     private EditText et_name;
     private EditText et_age;
+    private EditText et_name1;
+    private EditText et_age1;
     private ArrayList<Map<String, Object>> data;
     private ArrayList<Map<String, Object>> datacount = new ArrayList<Map<String, Object>>();
     ;
@@ -114,6 +116,8 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
         moneycount.setOnClickListener(this);
         et_name = (EditText) findViewById(R.id.et_name);
         et_age = (EditText) findViewById(R.id.et_count);
+        et_name1 = (EditText) findViewById(R.id.et_name1);
+        et_age1 = (EditText) findViewById(R.id.et_count1);
         listview = (ListView) findViewById(R.id.listview);
         updBtn = (Button) findViewById(R.id.quanbieupdata);
         updBtn.setOnClickListener(this);
@@ -124,7 +128,7 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
         addBtn.setOnClickListener(this);
         delBtn = (Button) findViewById(R.id.deletedata);//删除数据
         delBtn.setOnClickListener(this);
-        dbHelper = new FeedReaderDbHelper(this, DB_NAME, null, 3);
+        dbHelper = new FeedReaderDbHelper(this, DB_NAME, null, 4);
 
         countdbCountdbHelper = new FeedMoneyContHelper(this, DB_NAMEcount, null, 2);
         db = dbHelper.getWritableDatabase();// 打开数据库
@@ -186,12 +190,16 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
         values.put("name", et_name.getText().toString().trim());
         values.put("age", et_age.getText().toString().trim());
         values.put("time", Strtime);
-        ContentValues values2 = new ContentValues();
-        values2.put("name", 999);
-        values2.put("age", 999);
-        values.put("time", Strtime);
+
+        values.put("name1wushi", et_name1.getText().toString().trim());
+        values.put("age1wushi", et_age1.getText().toString().trim());
+        values.put("time1wushi", Strtime);
+//        ContentValues values2 = new ContentValues();
+//        values2.put("name1wushi", et_name1.getText().toString().trim());
+//        values2.put("age1wushi", et_age1.getText().toString().trim());
+//        values.put("time1wushi", Strtime);
         listsql.add(values);
-        listsql.add(values2);
+//        listsql.add(values2);
 // 批量插入数据
         for (int i = 0; i < listsql.size(); i++) {
             ContentValues valuesa = (ContentValues) listsql.get(i);
@@ -206,11 +214,26 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
 //插入数据total
 
         ContentValues valuescount = new ContentValues();
-        double moneytvale = Double.parseDouble(et_name.getText().toString().trim());
-        double doubshulaing = Double.parseDouble(et_age.getText().toString().trim());
-        double actionResult = (doubshulaing * moneytvale);
-        valuescount.put("moneycount", actionResult);
-        long rowidtotal = dbCount.insert(countdbCountdbHelper.TB_NAME, null, valuescount);
+        String valuestr = et_name.getText().toString().trim();
+        String moneytvale = "";
+        String doubshulaing = "";
+        if (et_name.getText().toString().trim().equals("") || et_name.getText().toString().trim().equals("券别") ||
+                et_age.getText().toString().trim().equals("") || et_age.getText().toString().trim().equals("数量")) {
+            LogUtil.d(TAG, "" + et_name.getText().toString().trim());
+            LogUtil.d(TAG, "" + et_age.getText().toString().trim());
+        } else {
+            moneytvale = et_name.getText().toString().trim();
+            doubshulaing = et_age.getText().toString().trim();
+
+            double doubshulaing1 = Double.parseDouble(doubshulaing);
+            double moneytvale1 = Double.parseDouble(moneytvale);
+            double actionResult = (moneytvale1 * doubshulaing1);
+            valuescount.put("moneycount", actionResult);
+            long rowidtotal = dbCount.insert(countdbCountdbHelper.TB_NAME, null, valuescount);
+
+        }
+
+
     }
 
     //查询数据
@@ -224,11 +247,19 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
             String name = cursor.getString(1);
             String age = cursor.getString(2);
             String time = cursor.getString(3);
+
+            String name1 = cursor.getString(4);
+            String age1 = cursor.getString(5);
+            String time1 = cursor.getString(6);
+
             item = new HashMap<String, Object>();
             item.put("_id", id);
             item.put("name", name);
             item.put("age", age);
             item.put("time", time);
+            item.put("name1wushi", name1);
+            item.put("age1wushi", age1);
+            item.put("time1wushi", time1);
             data.add(item);
             cursor.moveToNext();
         }
@@ -242,7 +273,8 @@ public class GuideFirstActivity extends AppCompatActivity implements View.OnClic
         // TODO Auto-generated method stub
         LogUtil.e(TAG, "数据源" + data);
         listAdapter = new SimpleAdapter(this, data,
-                R.layout.listview, new String[]{"_id", "name", "age", "time"}, new int[]{R.id.tvID, R.id.tvName, R.id.tvAge, R.id.tvTime});
+                R.layout.listview, new String[]{"_id", "name", "age", "time", "name1wushi", "age1wushi", "time1wushi"},
+                new int[]{R.id.tvID, R.id.tvName, R.id.tvAge, R.id.tvTime, R.id.tvName, R.id.tvAge, R.id.tvTime});
         listview.setAdapter(listAdapter);
     }
 
