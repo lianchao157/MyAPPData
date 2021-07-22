@@ -38,8 +38,6 @@ public class JingDontTypeActivity extends AppCompatActivity implements DataView 
 
             List<Beandata> list = (List<Beandata>) msg.obj;
             for (int i = 0; i < 8; i++) {
-
-
                 DataBean bd = new DataBean();
                 bd.setString("111");
                 bd.setTextstr("2222");

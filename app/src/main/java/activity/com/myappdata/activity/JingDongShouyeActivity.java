@@ -145,13 +145,11 @@ public class JingDongShouyeActivity extends FragmentActivity implements View.OnC
 //                bankEntity.setUsuallystr(table[i].get("XJ").getValues().toString());
 //
                 List<String> zkstrxj = table[i].get("XJ").getValues();
-                for (int k = 0; k< zkstrxj.size(); k++) {
-//                    xj = xj + zkstr1.get(k).replace(";", "\n");
-                    if(null==xj||xj.equals("")){
-                        xj = xj + zkstrxj.get(k) ;
-                    }
-                    else{
-                        xj = xj +"元"+ zkstrxj.get(k);
+                for (int k = 0; k < zkstrxj.size(); k++) {
+                    if (null == xj || xj.equals("")) {
+                        xj = xj + zkstrxj.get(k);
+                    } else {
+                        xj = xj + "元" + zkstrxj.get(k);
                         xj1 = xj.replace(";", "\n");
                     }
 
@@ -161,53 +159,10 @@ public class JingDongShouyeActivity extends FragmentActivity implements View.OnC
             }
         }
 
-//        List<cash> cashList = new ArrayList<>();
-//        for (int i = 0; i < str.length(); i++) {
-//            BankEntity bankEntity = new BankEntity();
-//            String str2 = str.replace("WD/", "\r\r网点:");
-//
-//            String str22 = str2.replace("PS/", "\r\r配送单号:");
-//            String str222 = str22.replace("ZZ/", "\r\r周转箱:");
-//            String str2222 = str222.replace("XJ/", "\r\r现金:");
-//            String str22222 = str2222.replace("ZK/", "\r\r账户资料:");
-//            String str22223 = str22222.replace("DY/", "\r\r抵质押品:");
-//            String str222222 = str22223.replace("PS/", "\r\r配送单号:");
-//            String str3 = str222222.replace("|", "\n");
-//
-//
-//            List<String> quanbieIds = table[0].get("WD").getValues();
-//            List<String> quanbieIds1 = table[0].get("PS").getValues();
-//
-//            cash c = new cash();
-//            if (str.length() % 2 == 0) {
-////                c.setWangdian(str[i]);
-//            } else {
-////                c.setWangdianps(str[i-1]);
-//            }
-//
-//
-//            cashList.add(c);
-//        }
-//
-//        cash c = new cash();
-//        c.setWangdian("1");
-//        c.setWangdianps("2");
-//        cash c1 = new cash();
-//        c1.setWangdian("1");
-//        c1.setWangdianps("2");
-//        cashList.add(c);
-//        cashList.add(c1);
 
 
     }
 
-//    private void LoadData() {
-//        for (int i = 0; i < 20; i++) {
-//
-//
-//        }
-//
-//    }
 
     @Override
     public void onClick(View v) {
