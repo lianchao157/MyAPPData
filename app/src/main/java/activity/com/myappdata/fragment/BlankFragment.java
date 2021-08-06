@@ -364,7 +364,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener, OnB
         tm1.setStrname("测试01");
         tm2.setStriamge("http://img02.tooopen.com/images/20150227/tooopen_sy_81141126968.jpg");
         tm2.setStrname("测试01");
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i <2; i++) {
             mFruitList.add(tm);
             mFruitList.add(tm1);
             mFruitList.add(tm2);
@@ -372,7 +372,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener, OnB
 
         //设置recyclerView标记，如果确定内容的高度都一致，设置为true，提高内容渲染效率；（如果高度不确定系统要自己适配高度）
         fragment_blank_rv.setHasFixedSize(true);
-        fragment_blank_rv.setAdapter(new TaoAdapter(mFruitList));
+//        fragment_blank_rv.setAdapter(new TaoAdapter(mFruitList));
         fragment_blank_rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -455,6 +455,7 @@ public class BlankFragment extends Fragment implements View.OnClickListener, OnB
 
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.i(TAG,""+e);
         }
 
 

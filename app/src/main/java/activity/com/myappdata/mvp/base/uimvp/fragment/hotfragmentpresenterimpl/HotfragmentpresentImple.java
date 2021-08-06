@@ -8,9 +8,14 @@ import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
  * 网络请求代码
  */
 public class HotfragmentpresentImple implements IPlacePresenter {
-    @Override
-    public void getProvinList() {
+//    @Override
+//    public void getProvinList() {
+//
+//    }
 
+    @Override
+    public Object getProvinList() {
+        return null;
     }
 
     @Override

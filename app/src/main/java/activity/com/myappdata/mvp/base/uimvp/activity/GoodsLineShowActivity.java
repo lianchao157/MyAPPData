@@ -28,7 +28,7 @@ import activity.com.myappdata.mvp.base.modelmvp.entity.Component;
 import activity.com.myappdata.mvp.base.modelmvp.entity.Goodemail;
 import activity.com.myappdata.mvp.base.modelmvp.entity.LogisticsINfoBean;
 import activity.com.myappdata.mvp.base.serviceupload.GoodLineinfoPresent;
-import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.LogisticsInfoAdapter;
+//import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.LogisticsInfoAdapter;
 import activity.com.myappdata.util.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +56,7 @@ public class GoodsLineShowActivity extends fengzhuangBaseActivity<GoodLineInfoCo
     //    @Inject
     City person;
 
-    private LogisticsInfoAdapter ladapter;
+//    private LogisticsInfoAdapter ladapter;
     @BindView(R.id.rv_logistics)
     RecyclerView rv_logistics;
     private List<LogisticsINfoBean> listgood = new ArrayList<LogisticsINfoBean>();
@@ -264,8 +264,8 @@ public class GoodsLineShowActivity extends fengzhuangBaseActivity<GoodLineInfoCo
             //解决ScrollView嵌套RecyclerView出现的系列问题
             rv_logistics.setNestedScrollingEnabled(false);
             rv_logistics.setHasFixedSize(true);
-            ladapter = new LogisticsInfoAdapter(GoodsLineShowActivity.this, R.layout.goodinfo_lineitem, list_GoodInfoLineInfoBase);//  这里需要传递布局id
-            rv_logistics.setAdapter(ladapter);
+//            ladapter = new LogisticsInfoAdapter(GoodsLineShowActivity.this, R.layout.goodinfo_lineitem, list_GoodInfoLineInfoBase);//  这里需要传递布局id
+//            rv_logistics.setAdapter(ladapter);
         }
     }
 

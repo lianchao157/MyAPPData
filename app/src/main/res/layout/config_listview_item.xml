@@ -19,8 +19,8 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#888888"
             android:text="key"
+            android:textColor="#888888"
             android:textSize="14sp" />
 
         <View
@@ -35,8 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#222222"
             android:text="value"
+            android:textColor="#222222"
             android:textSize="14sp" />
     </LinearLayout>
 

@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import activity.com.myappdata.util.LogUtil;
+
 /***
  * 日志存储工具类代码
  */
@@ -128,9 +130,14 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Looper.prepare();
-                Toast.makeText(mContext, "很抱歉,现钞管理系统停止运行,即将退出.", Toast.LENGTH_SHORT).show();
-                Looper.loop();
+                try {
+                    Looper.prepare();
+                    Toast.makeText(mContext, "很抱歉,现钞管理系统停止运行,即将退出.", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }catch (Exception e){
+                    LogUtil.d(TAG,""+e);
+                }
+
             }
         }).start();
 

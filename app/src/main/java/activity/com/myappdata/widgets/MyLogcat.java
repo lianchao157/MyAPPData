@@ -13,6 +13,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/***
+ * 记录日志代码写入文件
+ */
 public class MyLogcat extends Service {
         Thread thread;
         boolean readlog = true;

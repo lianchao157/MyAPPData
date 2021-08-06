@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="300px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        android:layout_marginTop="10px"
-        android:background="@drawable/buttom_selector_bg"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/recycleview_item"></include>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_10x"
+            android:layout_marginRight="@dimen/dimen_10x"
+            android:layout_marginTop="@dimen/dimen_10x"
+            android:background="@drawable/buttom_selector_bg"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <include layout="@layout/recycleview_item"></include>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_xianshiqianggou"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_xianshiqianggou"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_10x"
+                android:layout_marginRight="@dimen/dimen_10x"
+                android:layout_marginTop="@dimen/dimen_10x"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="2"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
 
-</LinearLayout>
+    </ScrollView>
+</LinearLayout><!--设置显示一行几列--><!--设置管理器-->

@@ -29,6 +29,7 @@ import activity.com.myappdata.adapter.fuzaadapter.base.Module;
 import activity.com.myappdata.entity.TestEntity;
 import activity.com.myappdata.mvp.base.basemvp.BaseFragment;
 import activity.com.myappdata.mvp.base.modelmvp.entity.Province;
+import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.UserinfoBywebData;
 import activity.com.myappdata.mvp.base.mvp.interactor.FindItemsInteractor;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenterImpl.MainPresenter;
 import activity.com.myappdata.mvp.base.uimvp.activity.ServerDownLoadApkActivity;
@@ -162,10 +163,10 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
     public void showMessage(String message) {
     }
 
-    @Override
-    public void loadedData(List<Province> provinceList) {
-
-    }
+//    @Override
+//    public void loadedData(List<Province> provinceList) {
+//
+//    }
 
     @Override
     public void onRefresh() {
@@ -190,5 +191,11 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
     @Override
     public void showError(String errorMsg) {
 
+    }
+
+    @Override
+    public void loadedData(List<UserinfoBywebData> provinceList) {
+
+        System.out.print(provinceList.size());
     }
 }

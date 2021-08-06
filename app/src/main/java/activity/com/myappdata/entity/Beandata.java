@@ -3,7 +3,7 @@ package activity.com.myappdata.entity;
 import java.io.Serializable;
 import java.util.List;
 
-public class Beandata  implements Serializable{
+public class Beandata implements Serializable {
     public Beandata() {
     }
 
@@ -38,7 +38,7 @@ public class Beandata  implements Serializable{
         Data = data;
     }
 
-    private  String code;
-    private String  message;
-    private  DataBean Data;
+    private String code;
+    private String message;
+    private DataBean Data;
 }

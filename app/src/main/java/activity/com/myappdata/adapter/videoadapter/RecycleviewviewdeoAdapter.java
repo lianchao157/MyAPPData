@@ -24,18 +24,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.jzvd.JZVideoPlayerStandard;
 
+/***
+ * 适配器
+ */
 public class RecycleviewviewdeoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    //    public RecycleviewviewdeoAdapter() {
-//    }
     private static final int TYPE_VIDEO = 0;  //视频类型
     private static final int TYPE_IMAGE = 1;    //图片类型
-    private static final int TYPE_TEXT = 2; //文本类型
     //————————————————
-//    版权声明：本文为CSDN博主「asjqkkkk」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
 //    原文链接：https://blog.csdn.net/asjqkkkk/article/details/78489245
     private static final String TAG = "FruitAdapter";
-
     public RecycleviewviewdeoAdapter(Context mContext, List<VideoEntity> mfruitList) {
         this.mContext = mContext;
         this.mfruitList = mfruitList;
@@ -109,7 +107,7 @@ public class RecycleviewviewdeoAdapter extends RecyclerView.Adapter<RecyclerView
 
 //            imageViewHolder.iv_image_icon.setImageResource(R.drawable.service_life_icon);
             if (fruit.getName() != null) {
-                Glide.with(mContext).load(fruit.getVideourl()).placeholder(R.drawable.service_life_icon).error(R.drawable.service_life_icon).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageViewHolder.iv_image_icon);
+                Glide.with(mContext).load(fruit.getVideourl()).into(imageViewHolder.iv_image_icon);
             }
         } else if (holder instanceof TextViewHolder) {
             TextViewHolder textViewHolder = (TextViewHolder) holder;
@@ -208,9 +206,9 @@ public class RecycleviewviewdeoAdapter extends RecyclerView.Adapter<RecyclerView
     private void bindCommonData(CommonView view, VideoEntity data) {
         if (data.getVideourl() != null) {
             Glide.with(mContext).load(data.getName())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .skipMemoryCache(false)
-                    .error(R.drawable.service_life_icon)
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .skipMemoryCache(false)
+//                    .error(R.drawable.service_life_icon)
                     .into(view.iv_headpic);
 
         }
@@ -251,7 +249,6 @@ public class RecycleviewviewdeoAdapter extends RecyclerView.Adapter<RecyclerView
 
     private void initCommonView(View itemView, CommonView commonView) {
         commonView.videoplayer = (JZVideoPlayerStandard) itemView.findViewById(R.id.videoplayer);
-
         commonView.iv_headpic = (ImageView) itemView.findViewById(R.id.rv_image);
         commonView.tv_name = (TextView) itemView.findViewById(R.id.rv_text);
 //        commonView.tv_time_refresh = (TextView) itemView.findViewById(R.id.tv_time_refresh);

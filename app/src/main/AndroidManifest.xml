@@ -5,61 +5,14 @@
     android:versionCode="2"
     android:versionName="1.1">
 
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- 在SDCard中创建与删除文件权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <!-- 往SDCard写入数据权限 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-    <!-- 推送时加入权限 -->
-    <!-- Required -->
-    <uses-permission android:name="com.hbapp.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <!-- Optional. Required for location feature -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <!-- 侧边球状的图 -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!-- 网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-
     <application
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden|screenSize"
-        android:icon="@mipmap/bigbanner"
+        android:icon="@mipmap/fishi"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.shopinfo.ShopInfoDataactivity"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".MenumActivity" />
         <activity android:name=".activity.MainActivity" />
@@ -70,39 +23,22 @@
         <activity android:name=".activity.ChangeTypeActivity" />
         <activity android:name=".activity.JDGoodsInfoActivity" />
 
-        <service
-            android:name=".widgets.FloatingViewService"
-            android:enabled="true" />
-        <service android:name=".MyService" />
-
         <activity android:name=".activity.JingDontTypeActivity" />
-        <!-- 销量排序页面 -->
         <activity android:name=".activity.xiaoliangjiagepaixuActivity" />
-        <activity android:name=".activity.VideoActivity" />
+
+        <activity android:name=".activity.VideoActivity" /> <!-- 销量排序页面 -->
         <activity android:name=".activity.GuideFirstActivity" />
-
-        <!-- 启动开启服务要写入运行日志 -->
-
-
+        <activity android:name=".activity.MainTestActivity" />
+        <activity android:name=".activity.CashInfoActivity" /> <!-- 启动开启服务要写入运行日志 -->
         <!-- <service -->
         <!-- android:name="activity.com.myappdata.widgets.MyLogcat" -->
         <!-- android:enabled="true" /> -->
         <!-- <service android:name=".MyService" /> -->
-
-
         <!-- <service android:name="MyService"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="activity.com.myappdata.widgets.MyLogcat"/> -->
         <!-- </intent-filter> -->
         <!-- </service> -->
-
-        <service
-            android:name=".widgets.MyLogcat"
-            android:enabled="true" />
-        <service android:name=".MyService" />
-
-        <activity android:name=".activity.MainTestActivity" />
-        <activity android:name=".activity.CashInfoActivity" />
         <activity android:name=".activity.JingDongTypeAllActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -111,13 +47,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvp.base.uimvp.activity.BaseActivty_MVP_Activity" />
+
         <activity android:name=".mvp.base.uimvp.activity.MainMvpActivity" />
         <activity android:name=".mvvm.ui.MvvmUiActivity" />
         <activity android:name=".activity.FuZaBuJuActivity" />
         <activity android:name=".activity.ManyRecycleviewTitleActivity" />
         <activity android:name=".activity.UPVersionActivity" />
         <activity android:name=".activity.TestActivity" />
-        <!-- <activity android:name=".mvp.base.uimvp.activity.MVPBaseActivity" /> -->
         <activity android:name=".mvp.base.uimvp.activity.MVP_LoginActivity" />
         <activity android:name=".mvp.base.uimvp.activity.fengzhuangBaseActivity" />
         <activity android:name=".mvp.base.uimvp.activity.ServerDownLoadApkActivity">
@@ -130,8 +66,6 @@
             <!-- </intent-filter> -->
 
         </activity>
-
-        <!-- 商品种类选择自定义 -->
         <activity android:name=".mvp.base.uimvp.activity.GoodInfoTypeSelectActivity">
 
             <!-- <intent-filter> -->
@@ -140,15 +74,7 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
-
-        <!-- 下载暗转的服务 -->
-        <service
-            android:name=".mvp.base.service.DownloadService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <!-- 测试专用的代码 无实际意义 -->
+        </activity> <!-- <activity android:name=".mvp.base.uimvp.activity.MVPBaseActivity" /> -->
         <activity android:name=".activity.JingshouyeActivity">
 
             <!-- <intent-filter> -->
@@ -167,13 +93,9 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-
-        <!-- 实现快递到哪了的任务列表 -->
-        <activity android:name=".mvp.base.uimvp.activity.GoodsLineShowActivity" />
-        <activity android:name=".mvp.base.uimvp.activity.DemoLoginByMVPActivity" />
-        <activity android:name=".activity.KuaishouLayCopyActivity" />
-
-        <!-- listview 嵌套listview -->
+        <activity android:name=".mvp.base.uimvp.activity.GoodsLineShowActivity" /> <!-- 商品种类选择自定义 -->
+        <activity android:name=".mvp.base.uimvp.activity.DemoLoginByMVPActivity" /> <!-- 下载暗转的服务 -->
+        <activity android:name=".activity.KuaishouLayCopyActivity" /> <!-- 测试专用的代码 无实际意义 -->
         <activity android:name=".activity.TwoLevelMenumActivity">
 
             <!-- <intent-filter> -->
@@ -183,7 +105,6 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <!-- 上拉刷新下拉加载更多 -->
         <activity android:name=".activity.UPdataBywebuserActivity">
 
             <!-- <intent-filter> -->
@@ -192,8 +113,73 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
+        </activity> <!-- 实现快递到哪了的任务列表 -->
+        <activity android:name=".activity.SearchInfoActivity" />
+        <activity android:name=".activity.changperssionactivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+
         </activity>
-        <activity android:name=".activity.SearchInfoActivity"></activity>
+        <activity android:name=".activity.RxTestActivity" /> <!-- listview 嵌套listview -->
+        <service
+            android:name=".widgets.FloatingViewService"
+            android:enabled="true" /> <!-- 上拉刷新下拉加载更多 -->
+        <service android:name=".MyService" /> <!-- fragment 嵌套 -->
+        <service
+            android:name=".widgets.MyLogcat"
+            android:enabled="true" /> <!-- 6.0 动态添加权限 -->
+        <service android:name=".MyService" />
+        <service
+            android:name=".mvp.base.service.DownloadService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 推送时加入权限 -->
+    <!-- Required -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="com.hbapp.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 侧边球状的图 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" /> <!-- 6.0动态权限代码 -->
+    <!-- 危险权限 -->
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" /> <!-- 一般权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
 </manifest>

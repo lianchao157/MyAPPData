@@ -1,5 +1,6 @@
 package activity.com.myappdata.adapter.recycleviewandrecycleview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,15 +54,12 @@ public class BusinessAdapter extends RecyclerView.Adapter<BusinessAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final BusinessEntity entity = (BusinessEntity) mData.get(position);
         holder.businessName.setText(entity.getBusinessName());
         Glide
                 .with(mContext)
                 .load(entity.getBusinessImage())
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
-                .crossFade()
                 .into(holder.businessImg);
 
 

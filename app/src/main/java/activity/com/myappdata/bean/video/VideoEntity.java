@@ -2,6 +2,9 @@ package activity.com.myappdata.bean.video;
 
 import java.io.Serializable;
 
+/***
+ * recycleview 多item 实体
+ */
 public class VideoEntity implements Serializable {
     public VideoEntity(String name, String videourl) {
         this.name = name;

@@ -75,7 +75,7 @@ subprojects {
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
-//        google()
+        google()
         jcenter()
     }
 
@@ -209,7 +209,7 @@ dependencies {
 //    annotationProcessor 'com.google.dagger:dagger-compiler:2.0'
 
 //     2021.3.12  实现物流 compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
 
 //   京东首页
 //    implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -217,6 +217,16 @@ dependencies {
 //    implementation 'com.google.android.material:material:1.1.0'
 
 //okhttp  wang'l哦依赖u
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
-    compile 'com.squareup.okio:okio:1.5.0'
+    implementation 'com.squareup.okhttp:okhttp:2.4.0'
+    implementation 'com.squareup.okio:okio:1.5.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'// 配合RetrofitManager
+
+
+//    仿写 淘宝详情页面2021.7.28
+    api 'com.bigkoo:convenientbanner:2.0.5'
+
+    //    gilde
+    api 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
 }

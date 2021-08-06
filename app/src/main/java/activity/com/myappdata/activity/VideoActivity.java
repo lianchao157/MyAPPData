@@ -29,7 +29,6 @@ import cn.jzvd.JZVideoPlayerStandard;
 public class VideoActivity extends AppCompatActivity {
 
     private FlexboxLayout flexboxlayout;///  相应式布局
-
     private SensorManager sensorManager;
     private RecyclerView viderv;
     private Toolbar toobar;

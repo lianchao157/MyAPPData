@@ -63,7 +63,7 @@ public class GoodinfoLineModel implements GoodLineInfoContract.Model {
     public void loginNet(MainContract.Model.LoginListener listener) {
         Retrofit retrofit = new Retrofit.Builder()
 //                    .baseUrl("http://localhost:8888/") // 设置 网络请求 Url
-                .baseUrl("http://192.168.1.167:8988") // 设置 网络请求 Url
+                .baseUrl("http://192.168.1.5:8988") // 设置 网络请求 Url
                 .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

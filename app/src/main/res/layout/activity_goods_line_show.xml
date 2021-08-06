@@ -120,8 +120,8 @@
         android:id="@+id/rv_logistics"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"></android.support.v7.widget.RecyclerView>
+        android:layout_marginLeft="@dimen/dimen_20x"
+        android:layout_marginRight="@dimen/dimen_20x"
+        android:layout_marginTop="@dimen/dimen_20x"></android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

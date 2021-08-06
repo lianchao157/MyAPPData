@@ -13,6 +13,7 @@ import java.util.List;
 import activity.com.myappdata.R;
 import activity.com.myappdata.mvp.base.basemvp.BaseFragment;
 import activity.com.myappdata.mvp.base.modelmvp.entity.Province;
+import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.UserinfoBywebData;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenter;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenterImpl.PlacePresenterImpl;
 import activity.com.myappdata.mvp.base.uimvp.activity.GoodInfoTypeSelectActivity;
@@ -78,14 +79,14 @@ public class MineFragment extends BaseFragment implements IProvinceCallbask {
         mPlacePresenter.getProvinList();
     }
 
-    @Override
-    public void loadedData(List<Province> provinceList) {
-        // 数据从这里回来
-        LogUtils.d(this,  "loadedData" + provinceList.toString());
-        if (provinceList != null) {
-            mPlaceAdapter.setmData(provinceList);
-        }
-    }
+//    @Override
+//    public void loadedData(List<Province> provinceList) {
+//        // 数据从这里回来
+//        LogUtils.d(this,  "loadedData" + provinceList.toString());
+//        if (provinceList != null) {
+//            mPlaceAdapter.setmData(provinceList);
+//        }
+//    }
 
     @Override
     public void onDestroy() {
@@ -96,4 +97,8 @@ public class MineFragment extends BaseFragment implements IProvinceCallbask {
     }
 
 
+    @Override
+    public void loadedData(List<UserinfoBywebData> provinceList) {
+
+    }
 }

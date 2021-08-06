@@ -13,7 +13,6 @@ import java.util.List;
 import activity.com.myappdata.activity.ChangeTypeActivity;
 import activity.com.myappdata.adapter.Gridviewadapter;
 import activity.com.myappdata.entity.GridvieMenumEntity;
-import activity.com.myappdata.widgets.MyLogcat;
 
 //http://111.160.42.163:8801/#/system/users
 
@@ -46,7 +45,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private GridView gridView;
     private Gridviewadapter gridviewadapter;
     private List<GridvieMenumEntity> gridviewlist = new ArrayList<>();///  数据源代码
-
     private TextView tvmainmenum;
 
     @Override
@@ -63,7 +61,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void loadData() {
-
         GridvieMenumEntity g = new GridvieMenumEntity();
         g.setImagstr("1");
 
@@ -76,9 +73,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()
-                ) {
-
+        switch (v.getId()) {
             case R.id.tvmainmenum:
                 Intent intent = new Intent(MainActivity.this, ChangeTypeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

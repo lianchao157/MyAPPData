@@ -45,9 +45,6 @@ public class TaoAdapter extends RecyclerView.Adapter<activity.com.myappdata.adap
         mFruitList = fruitList;
     }
 
-//    public TaoAdapter() {
-//    }
-
     ImageView mImageView;
     TextView mTextView;
 
@@ -78,8 +75,8 @@ public class TaoAdapter extends RecyclerView.Adapter<activity.com.myappdata.adap
         holder.fruitName.setText(fruit.getStrname());
         Glide.with(mContext)
                 .load(fruit.getStriamge())
-                .placeholder(R.drawable.gray_radius)//默认图
-                .error(R.drawable.selector_list_item)//发生错误的默认图
+//                .placeholder(R.drawable.gray_radius)//默认图
+//                .error(R.drawable.selector_list_item)//发生错误的默认图
                 .into(holder.fruitImage);
     }
 

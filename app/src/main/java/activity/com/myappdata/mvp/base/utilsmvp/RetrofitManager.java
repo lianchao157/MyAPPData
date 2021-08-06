@@ -3,6 +3,9 @@ package activity.com.myappdata.mvp.base.utilsmvp;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/***
+ * retorfit  封装2
+ */
 public class RetrofitManager {
     private static RetrofitManager INSTANCE;
     private Retrofit retrofit;

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import activity.com.myappdata.R;
-import activity.com.myappdata.adapter.RecycleviewAdapter;
+//import activity.com.myappdata.adapter.RecycleviewAdapter;
 import activity.com.myappdata.adapter.jingdongadapter.RecycleViewAdapter;
 import activity.com.myappdata.bean.TabTitleBrandEntity;
 import activity.com.myappdata.entity.EntityReccleview;
@@ -34,7 +34,7 @@ public class TabFragment extends Fragment {
 //    private RecyclerView tabfragmentrv;
     private RecyclerView rvxianshiqianggou;// 限时枪口
 
-    private RecycleviewAdapter mRecycleviewAdapter;
+//    private RecycleviewAdapter mRecycleviewAdapter;
     private List<EntityReccleview> recyclelist = new ArrayList<>(); //  限时抢购
     private List<TabTitleBrandEntity> tabTitleBrandEntitieslist = new ArrayList<TabTitleBrandEntity>();//  品牌顶部
 
@@ -75,11 +75,11 @@ public class TabFragment extends Fragment {
         recyclelist.clear();
         include = rootView.findViewById(R.id.include);
         LoadData();
-        mRecycleviewAdapter = new RecycleviewAdapter(recyclelist);
-        rvxianshiqianggou.setAdapter(mRecycleviewAdapter);
+//        mRecycleviewAdapter = new RecycleviewAdapter(recyclelist);
+//        rvxianshiqianggou.setAdapter(mRecycleviewAdapter);
 
-        mDivider = new SectionedGridDivider(TabFragment.this.getActivity(), 50, Color.parseColor("#F5F5F5"));
-        rvxianshiqianggou.addItemDecoration(mDivider);
+//        mDivider = new SectionedGridDivider(TabFragment.this.getActivity(), 50, Color.parseColor("#F5F5F5"));
+//        rvxianshiqianggou.addItemDecoration(mDivider);
 //  recycleview   滑动监听
         rvxianshiqianggou.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override

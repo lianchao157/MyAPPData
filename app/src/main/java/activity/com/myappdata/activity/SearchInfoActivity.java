@@ -46,12 +46,13 @@ public class SearchInfoActivity extends FragmentActivity implements View.OnClick
     private LinearLayout linsearchelin;
     private Context mContext;
 
-    private LinearLayout  lin_image;//   网络错误显示图片
+    private LinearLayout lin_image;//   网络错误显示图片
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_info);
-        mContext=SearchInfoActivity.this;
+        mContext = SearchInfoActivity.this;
         initView();
         initfragmetnt();
 
@@ -183,7 +184,7 @@ public class SearchInfoActivity extends FragmentActivity implements View.OnClick
             }
         });
         linsearchelin = (LinearLayout) findViewById(R.id.linsearchelin);
-        lin_image= (LinearLayout) findViewById(R.id.lin_image);
+        lin_image = (LinearLayout) findViewById(R.id.lin_image);
         lin_image.setVisibility(View.GONE);
     }
 
@@ -218,6 +219,7 @@ public class SearchInfoActivity extends FragmentActivity implements View.OnClick
                 }
             }
         }
+
         System.out.println("**** newwork is off");
         return false;
     }

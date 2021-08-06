@@ -23,7 +23,7 @@
         android:numColumns="3"
         android:scrollbars="none"
         android:verticalSpacing="10dp"
-        android:layout_marginBottom="@dimen/dp_10"/>
+        android:layout_marginBottom="10px"/>
 
     <ImageView
         android:id="@+id/hint_img"

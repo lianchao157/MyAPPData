@@ -32,10 +32,9 @@
             @android:drawable/progress_indeterminate_horizontal
         </item>
         <item name="android:progressDrawable">@drawable/progress_bar</item>
+        <item name="android:baseline">@dimen/dimen_10x</item>
+        <item name="android:progress">40</item>
     </style>
-
-
-
 
 
     <style name="AppTheme1" parent="Theme.AppCompat">

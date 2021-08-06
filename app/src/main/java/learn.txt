@@ -397,3 +397,695 @@ binding.buttoncalculate.setOnclick
 
 上传码云代码
 https://blog.csdn.net/xiaoxiaobai250/article/details/88327061
+
+
+10  retorfit  的封装
+https://blog.csdn.net/chentaishan/article/details/105654328
+
+
+11  2021.4.23  先把屏幕适配做好
+
+
+12
+picaso 的使用
+https://blog.csdn.net/alvinhuai/article/details/82228734前言
+                                                              上一篇博客picasso使用详解（一）详细介绍了picasso的各种使用方法与他的一些特性，这次从源码的角度详细讲解他的流程和原理。它的整体流程可以分为2个部分，一个是设置加载条件，确定需要展示的图片的各种属性，第二是加载然后对图片进行实际的处理，然后显示到目标对象上。
+
+                                                        流程简介
+                                                             picasso加载图片的整体流程其实可以看成是事件分发的机制，首先通过设置url与其他属性，封装一个完成的请求，然后通过入队分发从而每个具体的线程得以执行，执行完毕从服务器获取数据，解码生成bitmap，然后处理各种属性需求（圆角，变换，倒影），再通过分发得以显示。所以大致流程可以简化为：
+
+                                                             封装需求-->入队分发-->请求服务器-->获取数据解码处理属性-->分发显示
+
+                                                             下图来自codekk源码分析系列，不是原创，能清晰的表示流程。
+
+                                                             
+
+                                                        源码分析
+                                                             picasso可以处理多种形式的图片加载，在此我们使用最常见的网络请求作为例子进行分析，其他几种形式大同小异。
+
+                                                             首先通过Picasso.get()函数可以得到一个picasso的单例对象，我们来看picasso的构造函数：
+
+                                                         Picasso(Context context, Dispatcher dispatcher, Cache cache, Listener listener,
+                                                              RequestTransformer requestTransformer, List<RequestHandler> extraRequestHandlers, Stats stats,
+                                                              Bitmap.Config defaultBitmapConfig, boolean indicatorsEnabled, boolean loggingEnabled) {
+                                                            this.context = context;
+                                                            this.dispatcher = dispatcher;
+                                                            this.cache = cache;
+                                                            this.listener = listener;
+                                                            this.requestTransformer = requestTransformer;
+                                                            this.defaultBitmapConfig = defaultBitmapConfig;
+
+                                                            int builtInHandlers = 7; // Adjust this as internal handlers are added or removed.
+                                                            int extraCount = (extraRequestHandlers != null ? extraRequestHandlers.size() : 0);
+                                                            List<RequestHandler> allRequestHandlers = new ArrayList<>(builtInHandlers + extraCount);
+
+                                                            // ResourceRequestHandler needs to be the first in the list to avoid
+                                                            // forcing other RequestHandlers to perform null checks on request.uri
+                                                            // to cover the (request.resourceId != 0) case.
+                                                            allRequestHandlers.add(new ResourceRequestHandler(context));
+                                                            if (extraRequestHandlers != null) {
+                                                              allRequestHandlers.addAll(extraRequestHandlers);
+                                                            }
+                                                            allRequestHandlers.add(new ContactsPhotoRequestHandler(context));
+                                                            allRequestHandlers.add(new MediaStoreRequestHandler(context));
+                                                            allRequestHandlers.add(new ContentStreamRequestHandler(context));
+                                                            allRequestHandlers.add(new AssetRequestHandler(context));
+                                                            allRequestHandlers.add(new FileRequestHandler(context));
+                                                            allRequestHandlers.add(new NetworkRequestHandler(dispatcher.downloader, stats));
+                                                            requestHandlers = Collections.unmodifiableList(allRequestHandlers);
+
+                                                            this.stats = stats;
+                                                            this.targetToAction = new WeakHashMap<>();
+                                                            this.targetToDeferredRequestCreator = new WeakHashMap<>();
+                                                            this.indicatorsEnabled = indicatorsEnabled;
+                                                            this.loggingEnabled = loggingEnabled;
+                                                            this.referenceQueue = new ReferenceQueue<>();
+                                                            this.cleanupThread = new CleanupThread(referenceQueue, HANDLER);
+                                                            this.cleanupThread.start();
+                                                          }
+                                                             需要的参数比较多，我们只是选择几个比较重要的说说，否则就不是一篇博客可以说的完了。其中的dispatcher是负责分发请求的，cache是picasso的缓存机制，通过add添加的各种RequestHandler通是继承自抽象类RequestHandler，通过不同的requesthandler来处理不同类型的图片，我们也可以自定义requesthandler。看了构造函数，我们就要看它的实现方式了，picasso和很多工具一样通过bulider的模式来创建实例。
+
+                                                        public Picasso build() {
+                                                              Context context = this.context;
+
+                                                              if (downloader == null) {
+                                                                //默认使用的就是ok的下载器
+                                                                downloader = new OkHttp3Downloader(context);
+                                                              }
+                                                              if (cache == null) {
+                                                                //缓存大小为app内存大小的15%
+                                                                cache = new LruCache(context);
+                                                              }
+                                                              if (service == null) {
+                                                                //picasso自定义的线程池，目前容量是3，会根据网络情况而变化
+                                                                service = new PicassoExecutorService();
+                                                              }
+                                                              if (transformer == null) {
+                                                                //默认不做任何变换
+                                                                transformer = RequestTransformer.IDENTITY;
+                                                              }
+
+                                                              //用于统计缓存以及命中率，在本博客暂不深入分析
+                                                              Stats stats = new Stats(cache);
+
+                                                              //分发器用于各个任务的调度处理，HANDLER就是主线程的handler，必须通过它sendmessage来进行
+                                                              // target的图片显示。
+                                                              Dispatcher dispatcher = new Dispatcher(context, service, HANDLER, downloader, cache, stats);
+
+                                                              //生成picasso实例
+                                                              return new Picasso(context, dispatcher, cache, listener, transformer, requestHandlers, stats,
+                                                                  defaultBitmapConfig, indicatorsEnabled, loggingEnabled);
+                                                            }
+                                                                通过build()函数生成Picasso实例，我们看出downloader模块，线程池模块，lru缓存都是在这里进行初始化，所有的这些参数我们都是可以自定义来适应我们项目的需求，自定义的缓存，下载，线程池等模块都可以通过set()函数来设置。获取实例之后，接下来看load方法。
+
+                                                         public RequestCreator load(@Nullable Uri uri) {
+                                                            return new RequestCreator(this, uri, 0);
+                                                          }
+                                                               可以看到其实load方法最终的目的是生成一个RequestCreator，RequestCreator的作用就是提供了一些列api设置请求图片这个需求的各种属性（比如大小重置，旋转情况，请求优先级属性，是否变换），然后生成一个真正的请求。我们可以通过看Requestcreator的构造函数：
+
+                                                         RequestCreator(Picasso picasso, Uri uri, int resourceId) {
+                                                            if (picasso.shutdown) {
+                                                              throw new IllegalStateException(
+                                                                  "Picasso instance already shut down. Cannot submit new requests.");
+                                                            }
+                                                            this.picasso = picasso;
+                                                            this.data = new Request.Builder(uri, resourceId, picasso.defaultBitmapConfig);
+                                                          }
+
+                                                        //以下是Request类中的Builder的构造函数
+                                                        private Builder(Request request) {
+                                                              //加载图片的uri
+                                                              uri = request.uri;
+
+                                                              //如果加载的是本地resource，那么这个id不为空
+                                                              resourceId = request.resourceId;
+
+                                                              stableKey = request.stableKey;
+                                                              targetWidth = request.targetWidth;
+                                                              targetHeight = request.targetHeight;
+                                                              centerCrop = request.centerCrop;
+                                                              centerInside = request.centerInside;
+                                                              centerCropGravity = request.centerCropGravity;
+                                                              rotationDegrees = request.rotationDegrees;
+                                                              rotationPivotX = request.rotationPivotX;
+                                                              rotationPivotY = request.rotationPivotY;
+                                                              hasRotationPivot = request.hasRotationPivot;
+                                                              purgeable = request.purgeable;
+                                                              onlyScaleDown = request.onlyScaleDown;
+                                                              if (request.transformations != null) {
+                                                                transformations = new ArrayList<>(request.transformations);
+                                                              }
+                                                              config = request.config;
+                                                              priority = request.priority;
+                                                            }
+                                                               可以看出Request的builder也是一些属性的描述。所以request的一个纯粹的关于请求对象的描述。 在into之前都是对请求的描述，设置各种属相。然后生成了Request，然后就看into函数。
+
+                                                         public void into(ImageView target, Callback callback) {
+                                                            long started = System.nanoTime();
+
+                                                            //检查是否是主线程。如果不是则抛出异常
+                                                            checkMain();
+
+                                                            //target如果是空，也抛出异常
+                                                            if (target == null) {
+                                                              throw new IllegalArgumentException("Target must not be null.");
+                                                            }
+
+                                                            //这里是检测需要加载的图片是否包含url或者resourceid，都为空在取消请求，
+                                                            //如果有占位图就直接显示占位图
+                                                            if (!data.hasImage()) {
+                                                              picasso.cancelRequest(target);
+                                                              if (setPlaceholder) {
+                                                                setPlaceholder(target, getPlaceholderDrawable());
+                                                              }
+                                                              return;
+                                                            }
+
+                                                            //是否选择了fit模式，如果选择了需要计算图片的大小，然后进行重置
+                                                            //所以如果设置了fit模式，imageview的大小不能用wrap_content设置否则抛出异常
+                                                            if (deferred) {
+                                                              if (data.hasSize()) {
+                                                                throw new IllegalStateException("Fit cannot be used with resize.");
+                                                              }
+                                                              int width = target.getWidth();
+                                                              int height = target.getHeight();
+                                                              if (width == 0 || height == 0) {
+                                                                if (setPlaceholder) {
+                                                                  setPlaceholder(target, getPlaceholderDrawable());
+                                                                }
+                                                                picasso.defer(target, new DeferredRequestCreator(this, target, callback));
+                                                                return;
+                                                              }
+                                                              data.resize(width, height);
+                                                            }
+
+                                                            //构建request和requestkey
+                                                            Request request = createRequest(started);
+                                                            String requestKey = createKey(request);
+
+                                                            //根据memorypolicy来确认是否可以直接从内存读取。
+                                                            if (shouldReadFromMemoryCache(memoryPolicy)) {
+                                                              Bitmap bitmap = picasso.quickMemoryCacheCheck(requestKey);
+                                                              if (bitmap != null) {
+                                                                picasso.cancelRequest(target);
+                                                                setBitmap(target, picasso.context, bitmap, MEMORY, noFade, picasso.indicatorsEnabled);
+                                                                if (picasso.loggingEnabled) {
+                                                                  log(OWNER_MAIN, VERB_COMPLETED, request.plainId(), "from " + MEMORY);
+                                                                }
+                                                                if (callback != null) {
+                                                                  callback.onSuccess();
+                                                                }
+                                                                return;
+                                                              }
+                                                            }
+
+                                                            //  创建action，action才是最终会提交到队列中的对象，因为处理之后需要回传数据，所以不能
+                                                            //仅仅是提交一个request到队列。我们更需要的是结果。
+                                                            Action action =
+                                                                new ImageViewAction(picasso, target, request, memoryPolicy, networkPolicy, errorResId,
+                                                                    errorDrawable, requestKey, tag, callback, noFade);
+
+                                                            picasso.enqueueAndSubmit(action);
+                                                          }
+                                                                 我们可以看到，最终提交的是一个Action，Action也是一个抽象类，会根据我们不同的请求生成不同的action子类，他不但包含了请求信息，还包含了回调接口，所以他要包含picasso的实例。如果是一次要加载多个图片，那么会产生多个request和多个aciton，可以看Action类中有关于释放内存的措施。
+
+                                                         static class RequestWeakReference<M> extends WeakReference<M> {
+                                                            final Action action;
+
+                                                            RequestWeakReference(Action action, M referent, ReferenceQueue<? super M> q) {
+                                                              super(referent, q);
+                                                              this.action = action;
+                                                            }
+                                                          }
+                                                           //成成的target都是弱引用，会及时释放内存，避免长时间加载造成的内存占用过多。
+                                                          final WeakReference<T> target;
+                                                              接下来我们继续看sbumit之后的操作，通过dispatcher分发，
+
+                                                        void submit(Action action) {
+                                                            //添加到队列中去。
+                                                            dispatcher.dispatchSubmit(action);
+                                                        }
+
+                                                        //这是dispatcher初始化的情况
+                                                        Dispatcher dispatcher = new Dispatcher(context, service, HANDLER, downloader, cache, stats);
+
+                                                        // 这里是dispatcher类的情况，省略一部分代码
+
+
+                                                          final DispatcherThread dispatcherThread;
+                                                          final Context context;
+
+                                                          //线程池，支持自定义
+                                                          final ExecutorService service;
+
+                                                          //下载接口
+                                                          final Downloader downloader;
+
+                                                          //BitmapHunter实现了Runnable接口，这个才是网络请求核心类，实现了下载，解码，对bitmap进行
+                                                          //编辑，提交到线程池的最小单位。这个map保存了所有的请求。
+                                                          final Map<String, BitmapHunter> hunterMap;
+
+                                                          //保存了失败的action
+                                                          final Map<Object, Action> failedActions;
+
+                                                          //保存了暂停的action
+                                                          final Map<Object, Action> pausedActions;
+                                                          //暂停tag
+                                                          final Set<Object> pausedTags;
+
+                                                          //自己内部的handler，分发请求线程的时候，就是通过这个自己线程内部的handler进行分发
+                                                          final Handler handler;
+
+                                                          //主线程handler，因为dispather不止是负责将请求的线程提交到线程池。还需要将请求的结果分发
+                                                          //到目标来进行显示，所以必须包含主线程的handler
+                                                          final Handler mainThreadHandler;
+                                                          final Cache cache;
+                                                          final Stats stats;
+                                                          final List<BitmapHunter> batch;
+                                                          final NetworkBroadcastReceiver receiver;
+                                                          final boolean scansNetworkChanges;
+
+                                                          boolean airplaneMode;
+
+                                                          Dispatcher(Context context, ExecutorService service, Handler mainThreadHandler,
+                                                              Downloader downloader, Cache cache, Stats stats) {
+                                                            this.dispatcherThread = new DispatcherThread();
+                                                            this.dispatcherThread.start();
+                                                            this.hunterMap = new LinkedHashMap<>();
+                                                            this.failedActions = new WeakHashMap<>();
+                                                            this.pausedActions = new WeakHashMap<>();
+                                                            this.pausedTags = new LinkedHashSet<>();
+                                                            this.handler = new DispatcherHandler(dispatcherThread.getLooper(), this);
+                                                            this.downloader = downloader;
+                                                            this.mainThreadHandler = mainThreadHandler;
+
+                                                          }
+                                                            一步步查看我们会发现submit最终调用的是如下：这里的handler就是dispatcher类中线程的handler
+
+                                                        //这就是dispatcher类中的submit函数，使用的handler就是线程自己的handler
+                                                        void dispatchSubmit(Action action) {
+                                                            handler.sendMessage(handler.obtainMessage(REQUEST_SUBMIT, action));
+                                                          }
+                                                            发送消息之后我们来看消息的处理函数：
+
+                                                         void performSubmit(Action action, boolean dismissFailed) {
+
+                                                            //检测暂停的请求是否包含此次请求，如果包含，将请求保存到map，返回。
+                                                            if (pausedTags.contains(action.getTag())) {
+                                                              pausedActions.put(action.getTarget(), action);
+                                                              if (action.getPicasso().loggingEnabled) {
+                                                                log(OWNER_DISPATCHER, VERB_PAUSED, action.request.logId(),
+                                                                    "because tag '" + action.getTag() + "' is paused");
+                                                              }
+                                                              return;
+                                                            }
+
+                                                            //检测已经提交的请求是否包含此次请求，key就是根据url或者resourceid
+                                                            //这样的字段生成，如果已经包含了同样的请求，那么直接合并到同一个hunter中去。
+                                                            //bitmaphunter实现了runnable接口，这个类是最终请求网路并进行编码生成bitmap的类。
+
+                                                            BitmapHunter hunter = hunterMap.get(action.getKey());
+                                                            if (hunter != null) {
+                                                              hunter.attach(action);
+                                                              return;
+                                                            }
+
+                                                            if (service.isShutdown()) {
+                                                              if (action.getPicasso().loggingEnabled) {
+                                                                log(OWNER_DISPATCHER, VERB_IGNORED, action.request.logId(), "because shut down");
+                                                              }
+                                                              return;
+                                                            }
+
+                                                            //在这里生成一个bitmaphunter
+                                                            hunter = forRequest(action.getPicasso(), this, cache, stats, action);
+
+                                                            //获取返回的结果。
+                                                            hunter.future = service.submit(hunter);
+
+                                                            //保存到map中
+                                                            hunterMap.put(action.getKey(), hunter);
+                                                            if (dismissFailed) {
+                                                              failedActions.remove(action.getTarget());
+                                                            }
+
+                                                            if (action.getPicasso().loggingEnabled) {
+                                                              log(OWNER_DISPATCHER, VERB_ENQUEUED, action.request.logId());
+                                                            }
+                                                          }
+                                                           在perform中主要是获取到真正需要处理的bitmaphunter，让它执行并且获取到线程的结果。我们可以下forRequest函数
+
+                                                         static BitmapHunter forRequest(Picasso picasso, Dispatcher dispatcher, Cache cache, Stats stats,
+                                                              Action action) {
+                                                            Request request = action.getRequest();
+                                                            List<RequestHandler> requestHandlers = picasso.getRequestHandlers();
+
+                                                             //此函数的核心在于这里，根据request的不同，选择匹配的requesthandler
+                                                             //所有的requesthandler都继承抽象类requestHandler,其中的核心方法是load
+                                                             //根据不同的图片来源选择不同的加载方式，比如assets文件夹中的图片和网络图片的加载方式肯定不一样
+                                                             //加载网络图片用的是NetworkRequestHandler
+                                                             //对于这个请求不确定性和多个处理器都有机会处理的请情况，可以看做是责任连模式的简单应用
+
+                                                            for (int i = 0, count = requestHandlers.size(); i < count; i++) {
+                                                              RequestHandler requestHandler = requestHandlers.get(i);
+                                                              if (requestHandler.canHandleRequest(request)) {
+                                                                return new BitmapHunter(picasso, dispatcher, cache, stats, action, requestHandler);
+                                                              }
+                                                            }
+
+                                                            return new BitmapHunter(picasso, dispatcher, cache, stats, action, ERRORING_HANDLER);
+                                                          }
+                                                            回头看performsubmit函数，执行了submit之后，按照顺序一年执行bitmaphunter中的run函数了。
+
+                                                         @Override public void run() {
+                                                            try {
+                                                              //更新线程名
+                                                              updateThreadName(data);
+
+                                                              if (picasso.loggingEnabled) {
+                                                                log(OWNER_HUNTER, VERB_EXECUTING, getLogIdsForHunter(this));
+                                                              }
+
+                                                              //执行并且返回结果result包含了返回的图片的bitmap，drawable信息
+                                                              result = hunt();
+
+                                                              //执行完之后通过dispatcher在进行分发。result是全局变量，这样当分发之后，
+                                                              //回到函数可以通过result来获取返回的最终结果， this确保了每个对象获取自己
+                                                              //所需要的结果。
+
+                                                              if (!result.hasBitmap()) {
+                                                                dispatcher.dispatchFailed(this);
+                                                              } else {
+                                                                dispatcher.dispatchComplete(this);
+                                                              }
+                                                            } finally {
+                                                              Thread.currentThread().setName(Utils.THREAD_IDLE_NAME);
+                                                            }
+                                                          }
+
+
+                                                        Result hunt() throws IOException {
+                                                            //是否是内存模式读取
+                                                            if (shouldReadFromMemoryCache(data.memoryPolicy)) {
+                                                              Bitmap bitmap = cache.get(key);
+                                                              if (bitmap != null) {
+                                                                stats.dispatchCacheHit();
+                                                                if (picasso.loggingEnabled) {
+                                                                  log(OWNER_HUNTER, VERB_DECODED, data.logId(), "from cache");
+                                                                }
+                                                                return new Result(bitmap, MEMORY);
+                                                              }
+                                                            }
+
+                                                            //确认重连次数
+                                                            if (retryCount == 0) {
+                                                              data = data.newBuilder().networkPolicy(NetworkPolicy.OFFLINE).build();
+                                                            }
+
+                                                            final AtomicReference<Result> resultReference = new AtomicReference<>();
+                                                            final AtomicReference<Throwable> exceptionReference = new AtomicReference<>();
+                                                            final CountDownLatch latch = new CountDownLatch(1);
+                                                            try {
+                                                              //在本例中因为是网络请求，使用的是NetworkRequestHandler， 这是通过查看
+                                                              //其中的load会得知使用的完全是okhttp的下载方法。
+
+                                                              requestHandler.load(picasso, data, new RequestHandler.Callback() {
+                                                                @Override public void onSuccess(@Nullable Result result) {
+                                                                  resultReference.set(result);
+                                                                  latch.countDown();
+                                                                }
+
+                                                                @Override public void onError(@NonNull Throwable t) {
+                                                                  exceptionReference.set(t);
+                                                                  latch.countDown();
+                                                                }
+                                                              });
+
+                                                              latch.await();
+                                                            } catch (InterruptedException ie) {
+                                                              InterruptedIOException interruptedIoException = new InterruptedIOException();
+                                                              interruptedIoException.initCause(ie);
+                                                              throw interruptedIoException;
+                                                            }
+
+                                                            //如果出现异常。则抛出
+                                                            Throwable throwable = exceptionReference.get();
+                                                            if (throwable != null) {
+                                                              if (throwable instanceof IOException) {
+                                                                throw (IOException) throwable;
+                                                              }
+                                                              if (throwable instanceof Error) {
+                                                                throw (Error) throwable;
+                                                              }
+                                                              if (throwable instanceof RuntimeException) {
+                                                                throw (RuntimeException) throwable;
+                                                              }
+                                                              throw new RuntimeException(throwable);
+                                                            }
+
+                                                            Result result = resultReference.get();
+
+                                                            if (result.hasBitmap()) {
+                                                              if (picasso.loggingEnabled) {
+                                                                log(OWNER_HUNTER, VERB_DECODED, data.logId());
+                                                              }
+                                                              Bitmap bitmap = result.getBitmap();
+                                                              stats.dispatchBitmapDecoded(bitmap);
+
+                                                              //根据需求对bitmap进行剪裁
+                                                              int exifOrientation = result.getExifRotation();
+                                                              if (data.needsTransformation() || exifOrientation != 0) {
+                                                                if (data.needsMatrixTransform() || exifOrientation != 0) {
+                                                                  bitmap = transformResult(data, bitmap, exifOrientation);
+                                                                  if (picasso.loggingEnabled) {
+                                                                    log(OWNER_HUNTER, VERB_TRANSFORMED, data.logId());
+                                                                  }
+                                                                }
+
+                                                                //如果设置了transFrom那么进行变换。
+                                                                result = new Result(bitmap, result.getLoadedFrom(), exifOrientation);
+                                                                if (data.hasCustomTransformations()) {
+                                                                  result = applyCustomTransformations(data.transformations, result);
+                                                                  if (picasso.loggingEnabled) {
+                                                                    log(OWNER_HUNTER, VERB_TRANSFORMED, data.logId(),
+                                                                        "from custom transformations");
+                                                                  }
+                                                                }
+                                                              }
+                                                              if (result.hasBitmap()) {
+                                                                stats.dispatchBitmapTransformed(result.getBitmap());
+                                                              }
+                                                            }
+
+                                                            return result;
+                                                          }
+                                                           整体流程是通过hunt中的load方法获取到了需要的bitmap，然后查看各种属性配置，是否需要对bitmap做额外的处理， 再此处的一些异常处理机制忽略大家可以自己看看。处理完之后，通过dispatcher将结果分发出去。通过dispatcher类中的handler分发。dispatcher.dispatchComplete最终也会执行到dispatcher.performComplete 方法。
+
+                                                         void performComplete(BitmapHunter hunter) {
+                                                            //是否需要写入缓存
+                                                            if (shouldWriteToMemoryCache(hunter.data.memoryPolicy)) {
+                                                              RequestHandler.Result result = hunter.getResult();
+                                                              if (result.hasBitmap()) {
+                                                                cache.set(hunter.getKey(), result.getBitmap());
+                                                              }
+                                                            }
+
+                                                            //讲求结束，将hunter在map中删除
+                                                            hunterMap.remove(hunter.getKey());
+
+                                                            //处理hunter，在最新代码中，此处已经做改变。
+                                                              batch(hunter);
+                                                            if (hunter.getPicasso().loggingEnabled) {
+                                                              log(OWNER_DISPATCHER, VERB_BATCHED, getLogIdsForHunter(hunter), "for completion");
+                                                            }
+                                                          }
+                                                           batch函数，最终执行到
+
+                                                         void performBatchComplete() {
+                                                            List<BitmapHunter> copy = new ArrayList<>(batch);
+                                                            batch.clear();
+                                                            //将执行结果通过主线程handler分发
+                                                            mainThreadHandler.sendMessage(mainThreadHandler.obtainMessage(HUNTER_BATCH_COMPLETE, copy));
+                                                            logBatch(copy);
+                                                          }
+                                                        主线程handler的处理方式
+
+                                                        static final Handler HANDLER = new Handler(Looper.getMainLooper()) {
+                                                            @Override public void handleMessage(Message msg) {
+                                                              switch (msg.what) {
+                                                                case HUNTER_BATCH_COMPLETE: {
+                                                                  //获取bitmaphunter的结果
+                                                                  @SuppressWarnings("unchecked") List<BitmapHunter> batch = (List<BitmapHunter>) msg.obj;
+                                                                  //noinspection ForLoopReplaceableByForEach
+                                                                  for (int i = 0, n = batch.size(); i < n; i++) {
+                                                                    BitmapHunter hunter = batch.get(i);
+
+                                                                    //必须是hunter.picasso中的对应picasso，来处理结果
+                                                                    hunter.picasso.complete(hunter);
+                                                                  }
+                                                                  break;
+                                                         }
+
+
+                                                        //complete函数如下：
+
+                                                        void complete(BitmapHunter hunter) {
+                                                            //获取单个的action
+                                                            Action single = hunter.getAction();
+
+                                                            //获取被合并进来的action，上面的performsubmit内容描述过，遇到同样的请求，会合并。
+
+                                                            List<Action> joined = hunter.getActions();
+
+                                                            boolean hasMultiple = joined != null && !joined.isEmpty();
+                                                            boolean shouldDeliver = single != null || hasMultiple;
+
+                                                            if (!shouldDeliver) {
+                                                              return;
+                                                            }
+
+                                                            Uri uri = hunter.getData().uri;
+                                                            Exception exception = hunter.getException();
+                                                            Bitmap result = hunter.getResult();
+                                                            LoadedFrom from = hunter.getLoadedFrom();
+
+                                                            if (single != null) {
+                                                              //最终都是通过此函数将需要分发的结果处理掉
+                                                              deliverAction(result, from, single, exception);
+                                                            }
+
+                                                            if (hasMultiple) {
+                                                              //noinspection ForLoopReplaceableByForEach
+                                                              for (int i = 0, n = joined.size(); i < n; i++) {
+                                                                Action join = joined.get(i);
+                                                                deliverAction(result, from, join, exception);
+                                                              }
+                                                            }
+
+                                                            if (listener != null && exception != null) {
+                                                              listener.onImageLoadFailed(this, uri, exception);
+                                                            }
+                                                          }
+                                                           所以按照顺序进入deliverAction函数
+
+                                                         private void deliverAction(Bitmap result, LoadedFrom from, Action action, Exception e) {
+                                                            if (action.isCancelled()) {
+                                                              return;
+                                                            }
+                                                            if (!action.willReplay()) {
+                                                              targetToAction.remove(action.getTarget());
+                                                            }
+                                                            if (result != null) {
+                                                              if (from == null) {
+                                                                throw new AssertionError("LoadedFrom cannot be null.");
+                                                              }
+                                                              //核心的在这里，调用了action的complete，我们知道使用的是Imageviewaction,所以直接去查看
+                                                              action.complete(result, from);
+                                                              if (loggingEnabled) {
+                                                                log(OWNER_MAIN, VERB_COMPLETED, action.request.logId(), "from " + from);
+                                                              }
+                                                            } else {
+                                                              action.error(e);
+                                                              if (loggingEnabled) {
+                                                                log(OWNER_MAIN, VERB_ERRORED, action.request.logId(), e.getMessage());
+                                                              }
+                                                            }
+                                                          }
+
+
+                                                        //imageviewAction的complete方法
+                                                        @Override public void complete(RequestHandler.Result result) {
+                                                            if (result == null) {
+                                                              throw new AssertionError(
+                                                                  String.format("Attempted to complete action with no result!\n%s", this));
+                                                            }
+
+                                                            ImageView target = this.target.get();
+                                                            if (target == null) {
+                                                              return;
+                                                            }
+
+                                                            Context context = picasso.context;
+                                                            boolean indicatorsEnabled = picasso.indicatorsEnabled;
+                                                            //通过PicassonDrawable来设置获取到的bitmap到目标imageview
+                                                            PicassoDrawable.setResult(target, context, result, wrapper.noFade, indicatorsEnabled);
+
+                                                            //回调接口，这个接口是通过into(String url, CallBack callback)进行设置的，可为空
+                                                            if (callback != null) {
+                                                              callback.onSuccess();
+                                                            }
+                                                          }
+                                                        在这里PicassoDrawable继承自Drawable，它重写了ondraw方法，通过设置可以显示左上角表示图片来源的三角。我们可以看setResult函数
+
+                                                        static void setResult(ImageView target, Context context, RequestHandler.Result result,
+                                                              boolean noFade, boolean debugging) {
+                                                            //获取占位图
+                                                            Drawable placeholder = target.getDrawable();
+                                                            if (placeholder instanceof Animatable) {
+                                                              //如果是动画，则停止
+                                                              ((Animatable) placeholder).stop();
+                                                            }
+                                                            if (result.hasBitmap()) {
+                                                              Picasso.LoadedFrom loadedFrom = result.getLoadedFrom();
+                                                              Bitmap bitmap = result.getBitmap();
+                                                              PicassoDrawable drawable =
+                                                                  new PicassoDrawable(context, bitmap, placeholder, loadedFrom, noFade, debugging);
+
+                                                              //target也就是imageview，到此真正显示了图片
+                                                              target.setImageDrawable(drawable);
+                                                            } else if (result.hasDrawable()) {
+                                                              Drawable drawable = result.getDrawable();
+
+                                                              //设置drawable，如果是动画开始
+                                                              target.setImageDrawable(drawable);
+                                                              if (drawable instanceof Animatable) {
+                                                                ((Animatable) drawable).start();
+                                                              }
+                                                            }
+                                                          }
+                                                           到此加载图片的整个流程就算结束了。由于篇幅所限，只是书序的描述了一下流程，其中还有缓存，暂停等其他策略没有一一介绍。会在后面的文章中做出分析。
+                                                        ————————————————
+                                                        版权声明：本文为CSDN博主「雨打瓦」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+                                                        原文链接：https://blog.csdn.net/alvinhuai/article/details/82228734
+														
+														
+														
+														
+														
+														
+														
+														
+Android  6.0  动态权限问题
+ContextCompat.checkSelfPermission
+检查应用是否具有某个危险权限。如果应用具有此权限，方法将返回 PackageManager.PERMISSION_GRANTED，并且应用可以继续操作。如果应用不具有此权限，方法将返回 PackageManager.PERMISSION_DENIED，且应用必须明确向用户要求权限。
+
+ActivityCompat.requestPermissions
+应用可以通过这个方法动态申请权限，调用后会弹出一个对话框提示用户授权所申请的权限。
+
+ActivityCompat.shouldShowRequestPermissionRationale
+如果应用之前请求过此权限但用户拒绝了请求，此方法将返回 true。如果用户在过去拒绝了权限请求，并在权限请求系统对话框中选择了 Don't ask again 选项，此方法将返回 false。如果设备规范禁止应用具有该权限，此方法也会返回 false。
+
+onRequestPermissionsResult
+当应用请求权限时，系统将向用户显示一个对话框。当用户响应时，系统将调用应用的 onRequestPermissionsResult() 方法，向其传递用户响应，处理对应的场景。
+
+
+链接：https://www.jianshu.com/p/2fe4fb3e8ce0
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+
+
+	2021.7.15
+	数据库操作
+	http://c.biancheng.net/view/3112.html
+
+
+
+
+	2021,7.28   无网络时 配置 和相应的显示
+	https://blog.csdn.net/qq_34115167/article/details/80719219
+
+	各种工具类的合集
+	https://www.jianshu.com/nb/15490503
+
+
+	仿写淘宝页面
+	https://github.com/LiQinglin007/PullToLoadMoreView-master/blob/master/app/build.gradle

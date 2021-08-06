@@ -1,21 +1,38 @@
 package activity.com.myappdata.mvp.base.presentermvp.IPlacePresenterImpl;
 
-import android.util.Base64;
+import android.annotation.SuppressLint;
+import android.os.Message;
 import android.util.Log;
 
-import activity.com.myappdata.mvp.base.modelmvp.Api;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.UserinfoBywebData;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenter;
 import activity.com.myappdata.mvp.base.utilsmvp.Constants;
-import activity.com.myappdata.mvp.base.utilsmvp.RetrofitFactory;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 //import io.reactivex.schedulers.Schedulers;
 
 public class PlacePresenterImpl implements IPlacePresenter {
     private static final String TAG = "PlacePresenterImpl";
-
+    private List<UserinfoBywebData> userinfolist = new ArrayList<UserinfoBywebData>();
     @Override
-    public void getProvinList() {
-        String url = Constants.BASE_URL;
+    public String getProvinList() {
+        String url = Constants.BASE_URL1;
+        String result = "";
 //        RetrofitFactory.getRetrofit().create(Api.class).getVideoContent(url)
 //                .subscribeOn(Schedulers.io())
 //                .map(videoContentBean -> {
@@ -52,6 +69,77 @@ public class PlacePresenterImpl implements IPlacePresenter {
 //                    view.onHideLoading();
 //                    ErrorAction.print(throwable);
 //                });
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+//oki
+        String mToken = "";
+        RequestBody requestBody = new FormEncodingBuilder()
+//                .add("reportid", reportid)
+//                .add("reporttype", String.valueOf(reporttype))
+//                .add("type", String.valueOf(type))
+                .add("page", String.valueOf(1))
+                .add("limit", String.valueOf(10))
+                .build();
+        final Request request = new Request.Builder()
+                .addHeader("x-authorization", mToken)
+                .url("http://192.168.1.5:8988/selectAllbytype")
+//        http://localhost:8988/selectAllbytype?page=2&limit=5
+                .put(requestBody)
+                .build();
+
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+                Log.e(TAG, e + "连接");
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Response response) throws IOException {
+                Log.e(TAG, response.toString());
+                String result = response.body().string();
+                try {
+                    if (result == null || result.equals("")) {
+//                        mHandler.sendEmptyMessage(0);
+
+                    }else{
+                        JSONObject jsonObject = new JSONObject(result);
+                        JSONObject jsonObject1 = (JSONObject) jsonObject.get("data");
+                        Log.e(TAG, "连接" + jsonObject1);
+                        JSONArray jsonArray = jsonObject1.getJSONArray("data");
+                        userinfolist.clear();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            UserinfoBywebData userinfoBywebData = new UserinfoBywebData();
+                            userinfoBywebData.setUsername(jsonArray.getJSONObject(i).getString("username"));
+                            userinfoBywebData.setUsertel(jsonArray.getJSONObject(i).getString("usertel"));
+                            userinfoBywebData.setUsertype(jsonArray.getJSONObject(i).getString("usertype"));
+                            userinfolist.add(userinfoBywebData);
+                        }
+                        if (result == null || result.equals("")) {
+//                            mHandler.sendEmptyMessage(0);
+                            return;
+                        } else {
+                            Message message = Message.obtain();
+                            message.arg1 = jsonObject1.getInt("count");
+                            Log.e(TAG, "连接::::::::::" + jsonObject1.getInt("count"));
+                            Log.e(TAG, "连接::::::::::" + userinfolist.size());
+                            message.what = 1;
+//                            mHandler.sendMessage(message);
+                        }
+                    }
+                } catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+
+
+
+        });
+
+        return result;
     }
 
     @Override

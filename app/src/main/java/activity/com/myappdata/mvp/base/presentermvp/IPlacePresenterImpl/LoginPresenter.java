@@ -57,8 +57,8 @@ public class LoginPresenter implements LoginInteractor1.OnLoginFinishedListener 
 
     @Override
     public void LoginFaile() {
-        System.out.print("登陆失败");
         loginView.hideProgress();//  无法成功登陆后 隐藏进度条代码
+        System.out.print("登陆失败");
     }
 
     @Override

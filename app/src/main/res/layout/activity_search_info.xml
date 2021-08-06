@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     tools:context=".activity.SearchInfoActivity">
 
     <LinearLayout
         android:id="@+id/lin_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone"
         android:background="@drawable/neterr"
-        ></LinearLayout>
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
+
     <android.support.v7.widget.Toolbar
 
         android:id="@+id/toolbar"
@@ -105,9 +104,9 @@
         android:layout_height="match_parent"
         android:layout_above="@id/view_line1" />
 
-    ————————————————
-    版权声明：本文为CSDN博主「尼古拉斯阳」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-    原文链接：https://blog.csdn.net/linder_qzy/article/details/50739541
+    <!--————————————————-->
+    <!--版权声明：本文为CSDN博主「尼古拉斯阳」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。-->
+    <!--原文链接：https://blog.csdn.net/linder_qzy/article/details/50739541-->
 
 </LinearLayout><!--弄一个自定义的toobar
     ————————————————

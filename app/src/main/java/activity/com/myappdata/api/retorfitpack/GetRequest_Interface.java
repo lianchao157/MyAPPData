@@ -2,6 +2,10 @@ package activity.com.myappdata.api.retorfitpack;
 
 import activity.com.myappdata.api.retorfitpack.entity.Root;
 import activity.com.myappdata.api.retorfitpack.entity.Translation;
+import activity.com.myappdata.bean.FindFragmentMenumBase;
+import activity.com.myappdata.bean.FindFragmetnMenuTitleEntity;
+import activity.com.myappdata.entity.Beandata;
+import activity.com.myappdata.entity.ShopCarInfoenTity;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.MVPRoot;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.MVPUserInfo;
 import io.reactivex.Observable;
@@ -59,9 +63,8 @@ public interface GetRequest_Interface {
 //    原文链接：https://blog.csdn.net/u010872619/article/details/81773333
 
 
-
     @PUT("/pplogin")
-    Call<MVPRoot> getPPMVPlog(@Query("username") String  username, @Query("userpassword") String  userpassword
+    Call<MVPRoot> getPPMVPlog(@Query("username") String username, @Query("userpassword") String userpassword
 //            @Part("username") RequestBody username, @Part("userpassword") RequestBody userpassword
     );
 //            @Field("username") String username, @Field("userpassword") String userpassword);
@@ -75,10 +78,16 @@ public interface GetRequest_Interface {
      */
 //    @GET("/selectLineinfo")
     @GET("/selectLIneInfo")
-
     Observable<ResponseBody> selectLIneInfo(@Query("userphone") String userphone);
 
-
+    //  获取人员信息
     @PUT("/selectAllbytype")
-    Call<MVPUserInfo> selectAllbytype(@Query("page") String page , @Query("limit") String limit);
+    Call<MVPUserInfo> selectAllbytype(@Query("page") String page, @Query("limit") String limit);
+
+    // 获取 顶部菜单数据                                         ?menumtype
+    @GET("/getTitleMenumdata")
+    Call<FindFragmentMenumBase> getTitleMenumdata(@Query("type") String menumtype);
+    // 通过post 方式获取数据
+    @POST("/getTitleMenumdata")
+    Call<ShopCarInfoenTity> getDataByPost(@Query("type") ShopCarInfoenTity mShopCarInfoenTity);
 }

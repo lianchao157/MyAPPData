@@ -54,9 +54,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         Glide
                 .with(mContext)
                 .load(entity.getProductImage())
-                .centerCrop()
-                .placeholder(R.mipmap.ic_launcher)
-                .crossFade()
+//                .centerCrop()
+//                .placeholder(R.mipmap.ic_launcher)
+//                .crossFade()
                 .into(holder.productImg);
 //        holder.productImg.setImageResource(R.mipmap.ic_launcher);
     }

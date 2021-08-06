@@ -81,8 +81,6 @@ public class BlankFragmetistViewAdapter extends BaseAdapter {
 
         Glide.with(mContext)
                 .load(appList.get(position).getImagestr())
-                .placeholder(R.mipmap.fushi)//默认图
-                .error(R.mipmap.go_top)//发生错误的默认图
                 .into(BlankFragmetistViewHolder.intercomid);
         BlankFragmetistViewHolder.orgname.setText(appList.get(position).getImagestr());
         BlankFragmetistViewHolder.outtime.setText(appList.get(position).getMoney());
@@ -91,8 +89,6 @@ public class BlankFragmetistViewAdapter extends BaseAdapter {
         BlankFragmetistViewHolder.outtime2.setText(appList.get(position).getMoney());
         Glide.with(mContext)
                 .load(appList.get(position).getImagestr())
-                .placeholder(R.mipmap.fushi)//默认图
-                .error(R.mipmap.go_top)//发生错误的默认图
                 .into(BlankFragmetistViewHolder.orgname2);
         return convertView;
 

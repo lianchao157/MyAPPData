@@ -35,7 +35,7 @@ public class Model implements IModel{
 
                     Retrofit retrofit = new Retrofit.Builder()
 //                    .baseUrl("http://localhost:8888/") // 设置 网络请求 Url
-                            .baseUrl("http://192.168.1.166:8988") // 设置 网络请求 Url
+                            .baseUrl("http://192.168.1.5:8889") // 设置 网络请求 Url
                             .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();

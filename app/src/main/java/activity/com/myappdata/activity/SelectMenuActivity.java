@@ -186,7 +186,7 @@ private static final String TAG = "SelectMenuActivity";
         switch (v.getId()) {
 
 
-            case R.id.btnstopcar://  停车查询
+            case R.id.btnstopcar://  停车查询   测试页面
                 Intent intent = new Intent(SelectMenuActivity.this, JingDongShouyeActivity.class);
                 startActivity(intent);
 

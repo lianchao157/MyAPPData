@@ -38,19 +38,4 @@ public class MVPRoot {
         this.msg = msg;
         this.data = data;
     }
-//      "code": 0,
-//              "msg": "Success",
-//              "data":
-//    /// <summary>
-//    ///
-//    /// </summary>
-//    public int code { get; set; }
-//    /// <summary>
-//    ///
-//    /// </summary>
-//    public string msg { get; set; }
-//    /// <summary>
-//    ///
-//    /// </summary>
-//    public Data data { get; set; }
 }

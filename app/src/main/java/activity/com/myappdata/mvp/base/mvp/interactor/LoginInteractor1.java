@@ -11,13 +11,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import activity.com.myappdata.api.retorfitpack.GetRequest_Interface;
-import activity.com.myappdata.api.retorfitpack.entity.Data;
-import activity.com.myappdata.api.retorfitpack.entity.Root;
 import activity.com.myappdata.mvp.base.Contract.LoginContract;
 import activity.com.myappdata.mvp.base.modelmvp.entity.UserInfo;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.MVPRoot;
-import activity.com.myappdata.util.ToastUtil;
-import activity.com.myappdata.util.ToastUtils;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,10 +57,10 @@ public class LoginInteractor1 implements LoginContract.Interactor {
     ////////////---------------------------------底部老版本
 
     // 网络请求超时代码
-    private static final OkHttpClient client = new OkHttpClient.Builder().
-            connectTimeout(60, TimeUnit.SECONDS).
-            readTimeout(60, TimeUnit.SECONDS).
-            writeTimeout(60, TimeUnit.SECONDS).build();
+//    private static final OkHttpClient client = new OkHttpClient.Builder().
+//            connectTimeout(60, TimeUnit.SECONDS).
+//            readTimeout(60, TimeUnit.SECONDS).
+//            writeTimeout(60, TimeUnit.SECONDS).build();
 
     public void login(final String username, final String password, final OnLoginFinishedListener listener) {
         // Mock login. I'm creating a handler to delay the answer a couple of seconds
@@ -81,8 +77,8 @@ public class LoginInteractor1 implements LoginContract.Interactor {
             Retrofit retrofit = new Retrofit.Builder()
 //                    .baseUrl("http://localhost:8888/") // 设置 网络请求 Url
 //            http://localhost:8988/pplogin?username=1&userpassword=1
-                    .client(client)
-                    .baseUrl("http://192.168.1.167:8988") // 设置 网络请求 Url
+//                    .client(client)
+                    .baseUrl("http://192.168.1.5:8988") // 设置 网络请求 Url
                     .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
                     .build();
 
@@ -122,7 +118,7 @@ public class LoginInteractor1 implements LoginContract.Interactor {
                 public void onFailure(Call<MVPRoot> call, Throwable throwable) {
                     Log.e(TAG, "连接失败" + throwable);
                     listener.LoginFaile();
-                    listener.showFaile(throwable+"");
+                    listener.showFaile(throwable + "");
 
 
                 }

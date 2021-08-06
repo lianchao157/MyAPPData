@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MyAppData.iml" filepath="$PROJECT_DIR$/MyAppData.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/cmlibrary/cmlibrary.iml" filepath="$PROJECT_DIR$/cmlibrary/cmlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyAppData.iml" filepath="$PROJECT_DIR$/MyAppData.iml" group="MyAppData" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="MyAppData/app" />
+      <module fileurl="file://$PROJECT_DIR$/cmlibrary/cmlibrary.iml" filepath="$PROJECT_DIR$/cmlibrary/cmlibrary.iml" group="MyAppData/cmlibrary" />
     </modules>
   </component>
 </project>
