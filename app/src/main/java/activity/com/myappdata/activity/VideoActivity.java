@@ -20,6 +20,7 @@ import activity.com.myappdata.R;
 import activity.com.myappdata.bean.video.VideoEntity;
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZVideoPlayer;
+import cn.jzvd.JZVideoPlayerManager;
 import cn.jzvd.JZVideoPlayerStandard;
 
 /***
@@ -49,6 +50,13 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     private void initview() {
+        findViewById(R.id.btn_camera).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                cteateVideo();
+                shwolittlewidos();
+            }
+        });
 
         myJzvdStd = (JZVideoPlayerStandard) findViewById(R.id.videoplayer1activity);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -121,8 +129,34 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //     Jzvd.clearSavedProgress(this, null);
+        myJzvdStd.clearSavedProgress(this, null);
         //home back
         myJzvdStd.goOnPlayOnPause();
+
+        if (null != myJzvdStd) {
+            JZVideoPlayerStandard player = (JZVideoPlayerStandard) JZVideoPlayerManager.getCurrentJzvd();
+            if (player != null && player.currentState == player.CURRENT_STATE_PREPARING) {
+//                statepause = 2;
+                myJzvdStd.releaseAllVideos();
+            } else {
+//                statepause = 0;
+                myJzvdStd.clearSavedProgress(this, null);
+                myJzvdStd.goOnPlayOnPause();
+            }
+        }
+    }
+// 开启全屏幕模式
+    public  void  cteateVideo(){
+        myJzvdStd.startFullscreen(this, VideoActivity.class, "http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4", "饺子辛苦了");
+    }
+
+//    开启小窗
+    public void  shwolittlewidos(){
+//        开启小窗播放视频
+        myJzvdStd.startWindowTiny();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
