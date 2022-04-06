@@ -19,8 +19,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Model implements IModel{
-    private static final String TAG ="Model" ;
+public class Model implements IModel {
+    private static final String TAG = "Model";
 
     @Override
     public void getData(final LoadDataCallback callback) {
@@ -35,7 +35,7 @@ public class Model implements IModel{
 
                     Retrofit retrofit = new Retrofit.Builder()
 //                    .baseUrl("http://localhost:8888/") // 设置 网络请求 Url
-                            .baseUrl("http://192.168.1.5:8889") // 设置 网络请求 Url
+                            .baseUrl("http://192.168.1.76:8889") // 设置 网络请求 Url
                             .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .build();
@@ -94,7 +94,6 @@ public class Model implements IModel{
     }
 
     /**
-     *
      * 用于回传请求的数据的回传
      */
     public interface LoadDataCallback {

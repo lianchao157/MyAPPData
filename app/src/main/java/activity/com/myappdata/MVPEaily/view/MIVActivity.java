@@ -14,6 +14,9 @@ import activity.com.myappdata.MVPEaily.present.IPresenter;
 import activity.com.myappdata.MVPEaily.present.Presenter;
 import activity.com.myappdata.R;
 
+/***
+ * mvp 代码  通过handler   传递数据
+ */
 public class MIVActivity extends AppCompatActivity implements IView {
 
     private Button mBtnShowToast;

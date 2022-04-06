@@ -21,7 +21,7 @@ import activity.com.myappdata.api.retorfitpack.entity.Root;
  原文链接：https://blog.csdn.net/u014602228/article/details/99571722
  */
 public class MvvmUiActivity extends Activity {
-//    private ActivityMvvmMainBinding binding;
+    //    private ActivityMvvmMainBinding binding;
     Root root = new Root();
 
     @Override
@@ -30,7 +30,7 @@ public class MvvmUiActivity extends Activity {
 //        ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_mvvm_ui);
 //        setContentView(R.layout.activity_mvvm_ui);
 
-        Data user = new Data("Chintan Soni", "+91 9876543210","3333","33444");
+        Data user = new Data("Chintan Soni", "+91 9876543210", "3333", "33444");
 //        binding.setContact(user);
     }
 }
