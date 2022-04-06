@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import activity.com.myappdata.R;
@@ -36,23 +37,35 @@ public class VideobyActivity extends AppCompatActivity implements NetStateChange
     private RecyclerView recycle_byvideo;
     private TextView tvshow;
     private ImageView indicator_iamge;//  无网络的图
+    private String gowei =null;
+    private  List<String> listdata=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videoby);
         tvshow = (TextView) findViewById(R.id.tvshow);
-        indicator_iamge=(ImageView) findViewById(R.id.indicator_iamge);
+        indicator_iamge = (ImageView) findViewById(R.id.indicator_iamge);
 
 //        NetStateChangeReceiver.registerReceiver(this);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LoadDataAction();
-                Log.i(TAG, "开启线程了");
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                LoadDataAction();
+//                Log.i(TAG, "开启线程了");
+//            }
+//        }).start();
+
+//        if (gowei.equals("3")) {
+
+//        }
+//        for (int i=0; i<listdata.size();i++){
+//            System.out.println(""+listdata.get(2));
+//        }
+        System.out.println(""+listdata.get(2));
+
+
     }
 
     /****
@@ -80,7 +93,7 @@ public class VideobyActivity extends AppCompatActivity implements NetStateChange
         HttpEngine.getDuoBanTop1(new Observer<List<HotMenums>>() {
             @Override
             public void onSubscribe(Disposable d) {
-                Log.i(TAG, "d"+d);
+                Log.i(TAG, "d" + d);
 
             }
 
@@ -92,7 +105,7 @@ public class VideobyActivity extends AppCompatActivity implements NetStateChange
                 }
 
                 List<HotMenums> listdat = hotMenums;
-                if(hotMenums!=null||hotMenums.size()>0){
+                if (hotMenums != null || hotMenums.size() > 0) {
                     indicator_iamge.setVisibility(View.GONE);
                 }
 
@@ -101,7 +114,7 @@ public class VideobyActivity extends AppCompatActivity implements NetStateChange
 
             @Override
             public void onError(Throwable e) {
-                Log.i(TAG, "e"+e);
+                Log.i(TAG, "e" + e);
                 indicator_iamge.setVisibility(View.VISIBLE);
             }
 

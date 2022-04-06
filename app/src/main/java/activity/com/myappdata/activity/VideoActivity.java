@@ -18,6 +18,11 @@ import java.util.List;
 
 import activity.com.myappdata.R;
 import activity.com.myappdata.bean.video.VideoEntity;
+import activity.com.myappdata.util.LogUtil;
+import activity.com.myappdata.util.ToastUtil;
+import activity.com.myappdata.util.networkutils.NetworkListener;
+import activity.com.myappdata.util.networkutils.core.NetType;
+import activity.com.myappdata.util.networkutils.core.Network;
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.JZVideoPlayer;
 import cn.jzvd.JZVideoPlayerManager;
@@ -44,6 +49,7 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video);
         initview();
         loadData();
+        NetworkListener.getInstance().registerObserver(this);
     }
 
     private void loadData() {
@@ -157,6 +163,12 @@ public class VideoActivity extends AppCompatActivity {
     }
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        super.onDestroy(); NetworkListener.getInstance().unRegisterObserver(this);
+    }
+
+    @Network(netType = NetType.WIFI)
+    public void onNetChanged(NetType netType) {
+        LogUtil.d("video", "onNetChanged: 网络发生改变" + netType.name());
+        ToastUtil.makeText(VideoActivity.this,netType.name());
     }
 }
