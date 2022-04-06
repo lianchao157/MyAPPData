@@ -156,8 +156,6 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("name", ul.getUsername());
         editor.putString("imageurl", ul.getUserpassword());
-//        editor.putBoolean("iscredit", user.isCredit());
-//        editor.putString("phone",user.getPhone());
         editor.commit();//必须提交，否则保存不成功
     }
 
@@ -172,7 +170,6 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
         user.setUsername(sp.getString("name", ""));
         user.setUserpassword(sp.getString("imageurl", ""));
         if (null != user.getUserpassword() || null != user.getUsername()) {
-//        MyApplication.userInfoByLogin.setUsername(sp.getString("name","2"));
 //        MyApplication.userInfoByLogin.setUserpassword(sp.getString("imageurl", "2"));
         } else {
             startActivity(new Intent(this, MVP_LoginActivity.class));

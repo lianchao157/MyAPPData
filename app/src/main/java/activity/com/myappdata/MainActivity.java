@@ -16,23 +16,6 @@ import activity.com.myappdata.entity.GridvieMenumEntity;
 
 //http://111.160.42.163:8801/#/system/users
 
-
-//
-//1
-//        shiliufengongsi
-//        十六分公司
-//        12332123321
-//        分公司管理员
-//        华宝第十六分公司
-//        正常
-//
-//        2
-//        1610001
-//        十六巡更员
-//        12312321234
-//        巡更员
-//        华宝第十六分公司
-//        正常
 //
 //        3
 //        1611001
@@ -81,6 +64,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
         }
     }
+
+
+
 }
 //  git remote add dev git@github.com:xxx/xxx.git
 
