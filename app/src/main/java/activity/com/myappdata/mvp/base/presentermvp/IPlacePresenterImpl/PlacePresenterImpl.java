@@ -20,19 +20,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import activity.com.myappdata.BuildConfig;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.UserinfoBywebData;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenter;
 import activity.com.myappdata.mvp.base.utilsmvp.Constants;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
+import activity.com.myappdata.util.LogUtil;
 //import io.reactivex.schedulers.Schedulers;
 
+//项目地址
+//        D:\Cenlent_Code\项目\downloadAndroid\AndroidMVPObject-master\AndroidMVPObject-master\app\src\main\java\com\markshuai\androidmvpobject\apkupload
 public class PlacePresenterImpl implements IPlacePresenter {
     private static final String TAG = "PlacePresenterImpl";
     private List<UserinfoBywebData> userinfolist = new ArrayList<UserinfoBywebData>();
+    String  netResult="";
     @Override
     public String getProvinList() {
         String url = Constants.BASE_URL1;
-        String result = "";
+
 //        RetrofitFactory.getRetrofit().create(Api.class).getVideoContent(url)
 //                .subscribeOn(Schedulers.io())
 //                .map(videoContentBean -> {
@@ -69,7 +74,7 @@ public class PlacePresenterImpl implements IPlacePresenter {
 //                    view.onHideLoading();
 //                    ErrorAction.print(throwable);
 //                });
-
+        netResult="";
         OkHttpClient okHttpClient = new OkHttpClient();
 //oki
         String mToken = "";
@@ -82,7 +87,7 @@ public class PlacePresenterImpl implements IPlacePresenter {
                 .build();
         final Request request = new Request.Builder()
                 .addHeader("x-authorization", mToken)
-                .url("http://192.168.1.5:8988/selectAllbytype")
+                .url("http://10.17.4.119:8988/selectAllbytype")
 //        http://localhost:8988/selectAllbytype?page=2&limit=5
                 .put(requestBody)
                 .build();
@@ -92,19 +97,23 @@ public class PlacePresenterImpl implements IPlacePresenter {
             @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Request request, IOException e) {
+                if(BuildConfig.DEBUG){
+                    LogUtil.e(TAG,  "onFailure"+e);
+                    Message message = Message.obtain();
+                    message.what = 0;
+                }
 
-                Log.e(TAG, e + "连接");
             }
 
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Response response) throws IOException {
-                Log.e(TAG, response.toString());
+                LogUtil.e(TAG, response.toString());
                 String result = response.body().string();
                 try {
                     if (result == null || result.equals("")) {
 //                        mHandler.sendEmptyMessage(0);
-
+                        LogUtil.e(TAG,  "result null"+result);
                     }else{
                         JSONObject jsonObject = new JSONObject(result);
                         JSONObject jsonObject1 = (JSONObject) jsonObject.get("data");
@@ -120,26 +129,35 @@ public class PlacePresenterImpl implements IPlacePresenter {
                         }
                         if (result == null || result.equals("")) {
 //                            mHandler.sendEmptyMessage(0);
-                            return;
+//                            return;
+                            netResult="网路失败";
                         } else {
-                            Message message = Message.obtain();
-                            message.arg1 = jsonObject1.getInt("count");
+//                            Message message = Message.obtain();
+//                            message.arg1 = jsonObject1.getInt("count");
                             Log.e(TAG, "连接::::::::::" + jsonObject1.getInt("count"));
                             Log.e(TAG, "连接::::::::::" + userinfolist.size());
-                            message.what = 1;
+//                            message.what = 1;
 //                            mHandler.sendMessage(message);
+                            netResult=result;
                         }
+
                     }
                 } catch(JSONException e){
                     e.printStackTrace();
+                    LogUtil.e(TAG,  "JSONException"+e);
+
                 }
             }
 
 
 
         });
+        if (null==netResult||netResult.equals("")){
+            return "网路请求失败";
+        }else{
+            return netResult;
+        }
 
-        return result;
     }
 
     @Override
@@ -151,18 +169,4 @@ public class PlacePresenterImpl implements IPlacePresenter {
     public void unRegisterViewCallback(IProvinceCallbask callback) {
 
     }
-//    @Override
-//    public void getProvinList() {
-//
-//    }
-//
-//    @Override
-//    public void registerViewCallback(IProvinceCallbask callback) {
-//
-//    }
-//
-//    @Override
-//    public void unRegisterViewCallback(IProvinceCallbask callback) {
-
-//    }
 }

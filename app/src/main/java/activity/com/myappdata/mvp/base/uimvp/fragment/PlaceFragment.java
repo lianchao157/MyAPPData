@@ -77,17 +77,17 @@ public class PlaceFragment extends BaseFragment implements IProvinceCallbask {
     }
 
     @Override
-    public void loadedData(List<UserinfoBywebData> provinceList) {
+    public void loadedDatabyuser(List<UserinfoBywebData> provinceList) {
 
         // 数据从这里回来
         LogUtils.d(this, "loadedData" + provinceList.toString());
         if (provinceList != null) {
-            Log.e("PlaceFragment", "" + provinceList.toString());
+            LogUtils.e("PlaceFragment", "" + provinceList.toString());
 //            mPlaceAdapter.setmData(provinceList);
 //            mPlaceAdapter = new PlaceAdapter(provinceList);
 //        mPlaceAdapter = new PlaceAdapter();
         } else {
-            Log.e("PlaceFragment", "空空空");
+            LogUtils.e("PlaceFragment", "空空空");
         }
     }
 
