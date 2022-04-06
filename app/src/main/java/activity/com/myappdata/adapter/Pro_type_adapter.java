@@ -61,11 +61,11 @@ public class Pro_type_adapter extends BaseAdapter {
             if (type.getTypename().contains("电脑办公")) {
                 view.icon.setBackgroundResource(R.drawable.jz_backward_icon);
             } else if (type.getTypename().contains("个护化妆")) {
-                view.icon.setBackgroundResource(R.drawable.jz_volume_icon);
+                view.icon.setBackgroundResource(R.mipmap.fushi);
             } else if (type.getTypename().contains("鞋靴箱包")) {
                 view.icon.setBackgroundResource(R.drawable.jz_volume_icon);
             } else if (type.getTypename().contains("潮流女装")) {
-                view.icon.setBackgroundResource(R.drawable.jz_volume_icon);
+                view.icon.setBackgroundResource(R.drawable.abc_ic_star_black_16dp);
             } else if (type.getTypename().contains("图书")) {
                 view.icon.setBackgroundResource(R.drawable.jz_volume_icon);
             } else if (type.getTypename().contains("玩具乐器")) {
