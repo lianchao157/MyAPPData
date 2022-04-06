@@ -161,18 +161,20 @@
             android:id="@+id/tv_mine"
             android:layout_width="match_parent"
             android:layout_height="180px"
-            android:gravity="center|center_vertical"
-            android:text="goodinfolien |查看线路下的快递到哪了" />
+            android:gravity="center|left"
+            android:text="  goodinfolien |查看线路下的快递到哪了" />
         />
-
-
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5px"
         android:background="#DEDDDD" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycleviewmPlace"
+        android:layout_width="match_parent"
+        android:layout_height="80px"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

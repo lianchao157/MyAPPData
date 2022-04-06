@@ -26,6 +26,7 @@ import activity.com.myappdata.activity.SelectMenuActivity;
 import activity.com.myappdata.activity.TestActivity;
 import activity.com.myappdata.activity.TwoLevelMenumActivity;
 import activity.com.myappdata.activity.VideoActivity;
+import activity.com.myappdata.activity.video.VideobyActivity;
 import activity.com.myappdata.adapter.Pro_type_adapter;
 import activity.com.myappdata.entity.typeallkindentity.Type;
 import activity.com.myappdata.mvp.base.uimvp.activity.MVP_LoginActivity;
@@ -93,6 +94,9 @@ public class Fragment_pro_type extends Fragment {
                     startActivity(new Intent(Fragment_pro_type.this.getActivity(), TwoLevelMenumActivity.class));//  listview  实现复杂布局
                 } else if (arg3 == 12) {
                     startActivity(new Intent(Fragment_pro_type.this.getActivity(), SearchInfoActivity.class));//  listview  实现复杂布局
+                } else if (arg3 == 13) {
+                    startActivity(new Intent(Fragment_pro_type.this.getActivity(), VideobyActivity.class));//  listview  实现复杂布局
+
                 }
 
             }
@@ -113,8 +117,9 @@ public class Fragment_pro_type extends Fragment {
             type = new Type(i, typename + i, "");
 
             list.add(type);
-            Type type1 = new Type(1, "日历公交" + 1, "");
-            Type type2 = new Type(1, "mvp" + 1, "");
+//             type  添加的是最左侧的数据
+            Type type1 = new Type(1, "电脑办公" + 1, R.mipmap.fushi + "");
+            Type type2 = new Type(1, "mvp" + 1, R.mipmap.fushidi + "");
             Type type3 = new Type(1, "指导页面b" + 1, "");
             Type type4 = new Type(1, "详细页面" + 1, "");
             Type type5 = new Type(1, "复杂布局" + 1, "");
@@ -127,6 +132,8 @@ public class Fragment_pro_type extends Fragment {
 
             Type type11 = new Type(1, "recycleview 嵌套", "嵌套");
             Type type12 = new Type(1, "toobar嵌套", "嵌套");
+
+            Type type13 = new Type(1, "retorfit代码网络请求", "");
             list.add(type1);
             list.add(type2);
             list.add(type3);
@@ -139,6 +146,7 @@ public class Fragment_pro_type extends Fragment {
             list.add(type10);
             list.add(type11);
             list.add(type12);
+            list.add(type13);
         }
 
         progressBar.setVisibility(View.GONE);

@@ -10,17 +10,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btn_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下载" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80px"
-            android:layout_marginLeft="10px"
-            android:layout_marginRight="10px">
-
-            <ImageView
-                android:id="@+id/iv_scan"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@mipmap/fushidi" />
+            android:layout_height="50px"
+            android:layout_marginTop="10px">
 
             <EditText
                 android:id="@+id/etinfo"
@@ -32,29 +38,34 @@
                 android:background="@drawable/buttom_selector_bg"
                 android:hint="请输入要查询内容"
                 android:imeOptions="actionSearch"
-                android:inputType="text" />
+                android:inputType="text"
+                android:padding="5px" />
 
             <ImageView
                 android:id="@+id/iv_localcity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="10px"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="20px"
                 android:background="@mipmap/sousuo" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/localstation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10px"
+                android:background="@mipmap/icon_add"
+                android:text="武汉" />
 
-        <Button
-            android:id="@+id/btn_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="下载" />
+        </RelativeLayout>
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayoutfindfragmetn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20px"
             android:layout_marginBottom="20px">
 
             <android.support.v7.widget.RecyclerView
@@ -69,13 +80,6 @@
                 app:srlClassicsSpinnerStyle="Translate" />
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone" />
 
     </LinearLayout>
 
