@@ -14,6 +14,7 @@ public class TaoAdapterMenum implements Serializable {
 
     private String strname;
 
+    private String striamge;
     public String getStrname() {
         return strname;
     }
@@ -41,6 +42,5 @@ public class TaoAdapterMenum implements Serializable {
     public TaoAdapterMenum() {
     }
 
-    private String striamge;
 
 }
