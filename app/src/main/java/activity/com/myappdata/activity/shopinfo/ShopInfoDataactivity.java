@@ -63,6 +63,8 @@ public class ShopInfoDataactivity extends AppCompatActivity {
                     } else {
                         String msg = response.message();
                         ShopCarInfoenTity s = response.body();
+                        Log.d(TAG, "" + s.getShopcarinfoname());
+                        Log.d(TAG, "" + s.getShopcarinfourl());
                     }
                 }
 
@@ -86,3 +88,5 @@ public class ShopInfoDataactivity extends AppCompatActivity {
 
     }
 }
+//y3nwruta
+//        y3nwrufa
