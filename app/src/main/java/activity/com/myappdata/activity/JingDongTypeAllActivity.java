@@ -1,27 +1,44 @@
 package activity.com.myappdata.activity;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import activity.com.myappdata.R;
+import activity.com.myappdata.activity.searchbyjindong.SearchByJongDongActivity;
+import activity.com.myappdata.activity.video.HotMenums;
 import activity.com.myappdata.application.MyApplication;
 import activity.com.myappdata.fragment.typeallkind.Fragment_pro_type;
+import activity.com.myappdata.fragment.typeallkind.Fragment_pro_type02;
+import activity.com.myappdata.retorfitutils.HttpEngine;
 import activity.com.myappdata.server.CrashHandler;
+import activity.com.myappdata.util.intentaction.IntentUtil;
+import activity.com.myappdata.util.writelog.LogService;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /***
  *京东的货物分类
  *
  */
 public class JingDongTypeAllActivity extends AppCompatActivity {
+    private static final String TAG = "JingDongTypeAllActivity";
     private String toolsList[];
     private TextView toolsTextViews[];
     private View views[];
@@ -31,22 +48,65 @@ public class JingDongTypeAllActivity extends AppCompatActivity {
     private ViewPager shop_pager;
     private int currentItem = 0;
     private ShopAdapter shopAdapter;
-
+   public  CrashHandler.CrashUploader crashUploader;
+    public   PendingIntent pendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jing_dong_type_all);
-
+        initView();
         scrollView = (ScrollView) findViewById(R.id.tools_scrlllview);
         shopAdapter = new ShopAdapter(getSupportFragmentManager());
         inflater = LayoutInflater.from(this);
-        showToolsView();
-        initPager();
+        getNetResutl();
 
-        new Thread(new MyRunnable()).start();//   开启 一个线程
-        CrashHandler crashLog = CrashHandler.getInstance();
-        crashLog.init(getApplicationContext());
+//        new Thread(new MyRunnable()).start();//   开启 一个线程
+//        CrashHandler crashLog = CrashHandler.getInstance();
+//        crashLog.init(getApplicationContext());
+
+
+/***
+ * 启动记录日志服务
+ *
+ */
+//        Intent intent = new Intent(JingDongTypeAllActivity.this, LogService.class);
+//        startService(intent);
+//        ;
+        CrashHandler crashHandler=CrashHandler.getInstance();
+
+        crashHandler.init(JingDongTypeAllActivity.this,crashUploader,pendingIntent);
     }
+
+    /****
+     * 初始哈组件
+     */
+    private ImageView type_icon;
+    private EditText search_edit;
+
+    private String   serinput;///  查询搜索的输入内容
+    private void initView() {
+        type_icon = (ImageView) findViewById(R.id.type_icon);
+//        search_edit = (EditText) findViewById(R.id.search_edit);
+//
+//
+//        serinput=search_edit.getText().toString().trim();//
+//        if (serinput.equals("")) {
+//            Log.i("onNext==222=", "输入的数据为null");
+//        } else {
+//            Log.i("onNext==222=", "输入的数据为"+serinput);
+
+            type_icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(JingDongTypeAllActivity.this, SearchByJongDongActivity.class);
+                    startService(intent);
+
+                }
+            });
+        }
+
+//    }
+
 
     /**
      * 动态生成显示items中的textview
@@ -55,7 +115,13 @@ public class JingDongTypeAllActivity extends AppCompatActivity {
      * "居家生活", "珠宝饰品", "音像制品", "家具建材", "计生情趣", "营养保健", "奢侈礼品", "生活服务", "旅游出行"
      */
     private void showToolsView() {
-        toolsList = new String[]{"现钞页面", "潮流女装", "品牌男装", "内衣配饰",};
+        if (toolsList != null) {
+
+        } else {
+            toolsList = new String[]{"现钞页面", "潮流女装", "品牌男装", "内衣配饰"};
+        }
+
+
         LinearLayout toolsLayout = (LinearLayout) findViewById(R.id.tools);
         toolsTextViews = new TextView[toolsList.length];
         views = new View[toolsList.length];
@@ -64,7 +130,7 @@ public class JingDongTypeAllActivity extends AppCompatActivity {
             View view = inflater.inflate(R.layout.item_b_top_nav_layout, null);
             view.setId(i);
             view.setOnClickListener(toolsItemListener);
-            TextView textView = (TextView) view.findViewById(R.id.text);
+            TextView textView = (TextView) view.findViewById(R.id.text);//  顶部的数据
             textView.setText(toolsList[i]);
             toolsLayout.addView(view);
             toolsTextViews[i] = textView;
@@ -89,6 +155,7 @@ public class JingDongTypeAllActivity extends AppCompatActivity {
         shop_pager = (ViewPager) findViewById(R.id.goods_pager);
         shop_pager.setAdapter(shopAdapter);
         shop_pager.setOnPageChangeListener(onPageChangeListener);
+        shopAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -129,11 +196,43 @@ public class JingDongTypeAllActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int arg0) {
-            Fragment fragment = new Fragment_pro_type();
-            Bundle bundle = new Bundle();
-            String str = toolsList[arg0];
-            bundle.putString("typename", str);
-            fragment.setArguments(bundle);
+            Fragment fragment = null;
+            if (arg0 == 0) {
+                fragment = new Fragment_pro_type();
+                Bundle bundle = new Bundle();
+                String str = toolsList[arg0];
+                bundle.putString("typename", str);
+                fragment.setArguments(bundle);
+                return fragment;
+            } else if (arg0 == 1) {
+                fragment = new Fragment_pro_type02();
+                Bundle bundle = new Bundle();
+                String str = toolsList[arg0];
+                bundle.putString("typename", str);
+                fragment.setArguments(bundle);
+                return fragment;
+            } else if (arg0 == 2) {
+                fragment = new Fragment_pro_type02();
+                Bundle bundle = new Bundle();
+                String str = toolsList[arg0];
+                bundle.putString("typename", str);
+                fragment.setArguments(bundle);
+                return fragment;
+            } else if (arg0 == 3) {
+                fragment = new Fragment_pro_type02();
+                Bundle bundle = new Bundle();
+                String str = toolsList[arg0];
+                bundle.putString("typename", str);
+                fragment.setArguments(bundle);
+                return fragment;
+            } else if (arg0 == 4) {
+                fragment = new Fragment_pro_type02();
+                Bundle bundle = new Bundle();
+                String str = toolsList[arg0];
+                bundle.putString("typename", str);
+                fragment.setArguments(bundle);
+                return fragment;
+            }
             return fragment;
         }
 
@@ -203,4 +302,55 @@ public class JingDongTypeAllActivity extends AppCompatActivity {
     private int getViewheight(View view) {
         return view.getBottom() - view.getTop();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //调用封装好的retrofit请求方法
+
+
+
+
+    }
+
+    private void getNetResutl() {
+
+        HttpEngine.getDuoBanTop1(new Observer<List<HotMenums>>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.i(TAG,  ""+d);
+            }
+
+            @Override
+            public void onNext(List<HotMenums> hotMenums) {
+//                Log.i("onNext==222=", hotMenums.getHotmenumsimage() + "---" + hotMenums.getHotmenumsname());
+                List<String> liststrmenum = new ArrayList<String>();
+                for (int i = 0; i < hotMenums.size(); i++) {
+                    Log.i("onNext==222=", hotMenums.get(i).getHotmenumsname());
+                    liststrmenum.add(hotMenums.get(i).getHotmenumsname());
+                }
+
+                String[] strings = new String[liststrmenum.size()];
+                toolsList = null;
+                toolsList = liststrmenum.toArray(strings);
+                showToolsView();
+                initPager();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                showToolsView();
+                initPager();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+
+        });
+    }
+
+
 }

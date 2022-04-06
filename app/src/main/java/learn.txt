@@ -1089,3 +1089,131 @@ onRequestPermissionsResult
 
 	仿写淘宝页面
 	https://github.com/LiQinglin007/PullToLoadMoreView-master/blob/master/app/build.gradle
+
+
+	播放器 选择
+1.ijkplayer
+项目地址： https://github.com/Bilibili/ijkplayer
+介绍：Ijkplayer 是Bilibili发布的基于 FFplay 的轻量级 Android/iOS 视频播放器。实现了跨平台功能，
+API 易于集成；编译配置可裁剪，方便控制安装包大小；支持硬件加速解码，更加省电；提供 Android
+平台下应用弹幕集成的解决方案。
+
+
+2.ExoPlayer
+
+项目地址：https://github.com/google/ExoPlayer
+
+介绍：ExpPlayer是一个开源的，App等级的媒体API，它的开源项目包含了library和示例：ExoPlayer library - 这部分是核心的库
+
+           Demo app - 这部分是演示怎么使用ExoPlayer的Demo
+————————————————
+版权声明：本文为CSDN博主「flyMe0116」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/MINGZHNGLEI/article/details/80153125
+
+3
+3.GSYVideoPlayer
+项目地址： https://github.com/CarGuo/GSYVideoPlayer
+
+介绍：视频播放器，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频本身自带rotation的旋转（90,270之类），重力旋转与手动旋转的同步支持，支持列表播放 ，直接添加控件为封面，列表全屏动画
+————————————————
+版权声明：本文为CSDN博主「flyMe0116」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/MINGZHNGLEI/article/details/80153125
+
+4.JieCaoVideoPlayer
+
+项目地址：https://github.com/lipangit/JieCaoVideoPlayer
+
+介绍：节操视频播放器是一个让开发者可以三两行代码就能集成到应用中的视频播放框架，并且提供了开放的接口来满足不同开发者的不同需求
+
+
+5.PLDroidPlayer
+项目地址： https://github.com/pili-engineering/PLDroidPlayer
+
+介绍：PLDroidPlayer 是一个适用于 Android 平台的音视频播放器 SDK，可高度定制化和二次开发，为 Android 开发者提供了简单、快捷的接口，帮助开发者在 Android 平台上快速开发播放器应用
+特性：
+————————————————
+版权声明：本文为CSDN博主「flyMe0116」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/MINGZHNGLEI/article/details/80153125
+
+
+
+6 2021.9.26
+实现图片下在方式
+
+private Bitmap bitmap;
+    Handler handler = new Handler()
+    { @Override
+    public void handleMessage(Message msg) {
+        if (msg.what == 0x123) {
+        //使用ImageView显示图片
+            ivUrl.setImageBitmap(bitmap);
+        }
+    }
+    };
+    new Thread() {
+        @Override
+        public void run() {
+            try {
+                URL url = new URL("网络地址");//URl对象，指向本地服务器的一张图片
+         InputStream is = url.openStream();//打开输入流
+         bitmap = BitmapFactory.decodeStream(is);//解析成bitmap对象
+
+       handler.sendEmptyMessage(0x123);//handler机制UI显示图片
+       OutputStream os = openFileOutput("demon.png", MODE_PRIVATE);//打开一个文件对应的输入流
+         byte[] bytes = new byte[1024];
+  int has;
+       while ((has = is.read(bytes)) > 0) {
+      os.write(bytes, 0, has);//将URL对应的图片下载到本地
+        }
+   is.close();//关闭流
+      os.close();//关闭流
+  } catch (Exception e) {
+    e.printStackTrace();
+  }  }}.start();
+————————————————
+版权声明：本文为CSDN博主「卖糖果的小男孩」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/u010404906/article/details/79946924
+
+
+
+2
+private Bitmap bitmap;Handler handler = new Handler() {
+@Override public void handleMessage(Message msg) {
+if (msg.what == 0x123) {
+  //使用ImageView显示图片
+    ivUrl.setImageBitmap(bitmap);
+         }         }      };
+           new Thread() {       @Override       public void run() {         try {           URL url = new URL("网络地址");//URl对象，指向本地服务器的一张图片           InputStream is = url.openStream();//打开输入流           bitmap = BitmapFactory.decodeStream(is);//解析成bitmap对象           handler.sendEmptyMessage(0x123);//handler机制UI显示图片           OutputStream os = openFileOutput("demon.png", MODE_PRIVATE);//打开一个文件对应的输入流           byte[] bytes = new byte[1024];           int has;           while ((has = is.read(bytes)) > 0) {             os.write(bytes, 0, has);//将URL对应的图片下载到本地          }          is.close();//关闭流          os.close();//关闭流       } catch (Exception e) {        e.printStackTrace();     }  }}.start();
+————————————————
+版权声明：本文为CSDN博主「卖糖果的小男孩」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/u010404906/article/details/79946924
+
+
+
+
+
+3 当前方法可以设定fragment 选不通页面
+
+
+
+
+4 https://www.jianshu.com/p/050920706709
+retorfitnetutisl  封装使用
+../../../../gradle-4.10.2/caches/transforms-1/files-1.1/appcompat-v7-23.3.0.aar/27d66b4eadddaed71a2f6a03004d8202
+/res/values/values.xml
+
+5     ———————————————— No Network Security Config specified, using platform default
+      版权声明：本文为CSDN博主「詹大先生」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+      原文链接：https://blog.csdn.net/qq_35502206/article/details/107272151
+
+
+
+      6java  和集合和数组互相转化
+   https://www.cnblogs.com/Dream2hc/p/java51713565.html
+
+
+
+
+
+   7  观察者模式下的网实时监控
+   https://www.jianshu.com/p/6fa0f1f1ce48

@@ -78,7 +78,7 @@ public class LoginInteractor1 implements LoginContract.Interactor {
 //                    .baseUrl("http://localhost:8888/") // 设置 网络请求 Url
 //            http://localhost:8988/pplogin?username=1&userpassword=1
 //                    .client(client)
-                    .baseUrl("http://192.168.1.5:8988") // 设置 网络请求 Url
+                    .baseUrl("http://192.168.1.76:8988") // 设置 网络请求 Url
                     .addConverterFactory(GsonConverterFactory.create()) //设置使用Gson解析(记得加入依赖)
                     .build();
 
