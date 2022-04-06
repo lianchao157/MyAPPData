@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg"
+    android:orientation="vertical"
+    tools:context=".activity.video.VideobyActivity">
+<include layout="@layout/toolbar"></include>
+    <TextView
+        android:id="@+id/tvshow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试"
+        android:textColor="@color/blue"
+        android:textSize="30px" />
+
+    <activity.com.myappdata.util.androidtitlebar.StatusBarView
+        android:id="@+id/sbv"
+        android:layout_width="match_parent"
+        android:layout_height="80px"></activity.com.myappdata.util.androidtitlebar.StatusBarView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_byvideo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include layout="@layout/indicator_image" />
+
+
+</LinearLayout>
