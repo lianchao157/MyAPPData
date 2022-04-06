@@ -1,5 +1,7 @@
 package activity.com.myappdata.mvp.base.uimvp.fragment.hotfragmentpresenterimpl;
 
+import java.util.List;
+
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenter;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 
@@ -20,6 +22,7 @@ public class HotfragmentpresentImple implements IPlacePresenter {
 
     @Override
     public void registerViewCallback(IProvinceCallbask callback) {
+//        callback.loadedData();
 
     }
 
