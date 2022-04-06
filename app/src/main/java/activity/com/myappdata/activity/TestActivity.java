@@ -41,8 +41,8 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        CrashHandler crashLog = CrashHandler.getInstance();
-        crashLog.init(getApplicationContext());
+//        CrashHandler crashLog = CrashHandler.getInstance();
+//        crashLog.init(getApplicationContext());
 //        play = (StandardGSYVideoPlayer) findViewById(R.id.play);
 //        play.setUp("https://txmov2.a.yximgs.com/upic/2020/11/12/18/BMjAyMDExMTIxODA2NTBfMjUyMDg5MDg5XzM5MTA4MTEzMjYwXzFfMw==_b_B349b0c56632f063aeb72d151a3f5505c.mp4", true, "");
 //        play.startPlayLogic();
