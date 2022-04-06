@@ -37,6 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /***
  *    retorfit   使用代码
  *    https://www.jianshu.com/p/ddd73eb6ffaa
+ *    当前为网络请求retrorfit 使用
  */
 public class CashInfoActivity extends AppCompatActivity implements View.OnClickListener {
 

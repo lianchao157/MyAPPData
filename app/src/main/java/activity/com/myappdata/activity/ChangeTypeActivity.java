@@ -58,8 +58,8 @@ public class ChangeTypeActivity extends AppCompatActivity {
 //        intent.setAction("activity.com.myappdata.widgets.MyLogcat");
 //        bindService(intent, conn, Service.BIND_AUTO_CREATE);
 //        启动记录log日志
-//        Intent intent2 = new Intent(this, MyLogcat.class);
-//        startService(intent2);
+        Intent intent2 = new Intent(this, MyLogcat.class);
+        startService(intent2);
     }
 
     /*初始化数据  向集合中添fragment*/
