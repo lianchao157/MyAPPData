@@ -88,7 +88,6 @@ public class GoodsLineShowActivity extends fengzhuangBaseActivity<GoodLineInfoCo
         setContentView(R.layout.activity_goods_line_show);
         unbinder = ButterKnife.bind(this);
 //        DaggerActivityComponent.builder().build().inject(this);
-//————————————————
 //        版权声明：本文为CSDN博主「行走在青春路上的小蜜蜂」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
 //        原文链接：https://blog.csdn.net/u010257931/article/details/104790257/
         mPresent.login(GoodsLineShowActivity.this);
