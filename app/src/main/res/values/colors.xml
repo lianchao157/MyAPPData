@@ -105,4 +105,20 @@
     <color name="view1_bg">#d2d2d2</color>
 
     <color name="bg_loading">#f0f0f3</color>
+
+    <color name="line_gray">#dcdcdc</color>
+    <color name="line_gray_light">#f1f1f1</color>
+    <color name="gray_page_bg">#ecedf1</color>
+    <color name="gray_text">#5b5b5b</color>
+    <color name="gray_text_dark">#292929</color>
+    <color name="gray_text_light">#979797</color>
+    <color name="window_half_transparent">#90000000</color>
+    <color name="blue_white">#0eabe5</color>
+
+    <!-- 主页 -->
+    <color name="menu_gray">#8a8a8a</color>
+    <color name="menu_green">#45c01a</color>
+
+    <!-- 微信 -->
+    <color name="wx_head_selected">#45c01a</color>
 </resources>

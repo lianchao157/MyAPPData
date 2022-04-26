@@ -86,5 +86,20 @@
       <option name="name" value="maven2" />
       <option name="url" value="https://dl.bintray.com/jetbrains/anko" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="file:/$PROJECT_DIR$/%20https:/mirrors.huaweicloud.com/repository/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="file:/$PROJECT_DIR$/cmlibrary/%20https:/mirrors.huaweicloud.com/repository/maven" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven2" />
+      <option name="name" value="maven2" />
+      <option name="url" value="file:/$PROJECT_DIR$/app/%20https:/mirrors.huaweicloud.com/repository/maven" />
+    </remote-repository>
   </component>
 </project>

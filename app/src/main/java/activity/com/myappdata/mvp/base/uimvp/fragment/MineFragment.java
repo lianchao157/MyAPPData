@@ -35,7 +35,8 @@ public class MineFragment extends BaseFragment implements IProvinceCallbask, Vie
     private TextView tv_mine;
     private LinearLayout lin_tv_mine;//  商品选择类型的布局
     private Button my_logoutbtn;//  登出系统
-private  LinearLayout setpowerlin; //设置预留
+    private LinearLayout setpowerlin; //设置预留
+
     @Override
     protected int getLayoutInflaterResId() {
         return R.layout.fragment_item_goods_config_info;
@@ -69,7 +70,7 @@ private  LinearLayout setpowerlin; //设置预留
                 MineFragment.this.getActivity().finish();
             }
         });
-        setpowerlin= (LinearLayout) rootView.findViewById(R.id.setpowerlin);
+        setpowerlin = (LinearLayout) rootView.findViewById(R.id.setpowerlin);
         setpowerlin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

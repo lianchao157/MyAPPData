@@ -1217,3 +1217,45 @@ retorfitnetutisl  封装使用
 
    7  观察者模式下的网实时监控
    https://www.jianshu.com/p/6fa0f1f1ce48
+
+
+   8   避免布局绘制
+
+    大意是，merge标签是用来帮助在视图树中减少重复布局的，当一个layout包含另外一个layout时。
+   merge必须放在布局文件的根节点上。
+   merge并不是一个ViewGroup，也不是一个View，它相当于声明了一些视图，等待被添加。
+   merge标签被添加到A容器下，那么merge下的所有视图将被添加到A容器下。
+   因为merge标签并不是View，所以在通过LayoutInflate.inflate方法渲染的时候， 第二个参数必须指定一个父容器，且第三个参数必须为true，也就是必须为merge下的视图指定一个父亲节点。
+   因为merge不是View，所以对merge标签设置的所有属性都是无效的。
+
+   链接：https://www.jianshu.com/p/af58200d0166
+  https://blog.csdn.net/willway_wang/article/details/73526383?spm=
+  1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_antiscanv2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_antiscanv2&utm_relevant_index=2
+
+
+  非常好的例子
+
+
+  https://gitcode.net/mirrors/jinboy23520/codertodeveloperbytcler/-/tree/v1.0.0/CoderToDeveloperByTCLer/app/src/main/java/javademo
+
+
+  622.4.25
+    Android   Android中使用图形处理引擎，2D部分是android SDK内部自己提供，3D部分是用Open GL ES 1.0。
+    绘制直线：canvas.drawLine(float startX, float startY, float stopX, float stopY, Paint paint);
+
+    绘制矩形：canvas.drawRect(float left, float top, float right, float bottom, Paint paint);
+
+    绘制圆形：canvas.drawCircle(float cx, float cy, float radius, Paint paint);
+
+    绘制字符：canvas.drawText(String text, float x, float y, Paint paint);
+
+    绘制图形：canvas.drawBirmap(Bitmap bitmap, float left, float top, Paint paint);
+
+    绘制圆弧:drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint)
+
+    oval 椭圆边界startAngle 起始角度sweepAngle 扫描范围(度数)
+
+
+
+    自定义view
+    https://github.com/lygttpod/AndroidCustomView.git

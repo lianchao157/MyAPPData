@@ -4,7 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -19,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +59,8 @@ import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.PlaceAdapter;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 import activity.com.myappdata.mvp.base.view.MainView;
 import activity.com.myappdata.mvp.base.uimvp.fragment.hotfragmentpresenterimpl.HotfragmentpresentImple;
+import activity.com.myappdata.uiutils.ClockView;
+import activity.com.myappdata.uiutils.DrawGeometryView;
 import activity.com.myappdata.util.ActivitySkipUtil;
 import activity.com.myappdata.util.LogUtil;
 import activity.com.myappdata.util.ToastUtil;
@@ -79,7 +86,6 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
     private Button btn_down;
     private SmartRefreshLayout refreshLayoutfindfragmetn;//  上拉刷新下拉加载更多
     private Context mContext;
-
     private ImageView imageViewscan;//需要查询的页面  仿写京东
 
     //    @InjectView(R.id.toolbar)
@@ -144,6 +150,35 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
             }
         });
         backgroundAlpha(1f);// 跳整屏幕亮度
+
+
+//        画图
+
+        RelativeLayout layout=(RelativeLayout) rootView.findViewById(R.id.main);
+//        layout.addView(new DrawGeometryView(HotFFragment.this.getActivity()));
+        layout.addView(new ClockView(HotFFragment.this.getActivity()));// 时钟
+//        Paint mPaint = new Paint();
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+//                R.drawable.ic_launcher_background);
+//        canvas.drawBitmap(bitmap,100,50,mPaint);
+//        drawTranslate(canvas)；
+    }
+
+    private void drawTranslate(Canvas canvas){
+        Paint mPaint = new Paint();
+        mPaint.setColor(Color.BLUE);
+        mPaint.setStrokeWidth(4.0f);
+        mPaint.setTextSize(30f);
+        //初始的时候原点为(0,0)，画一个圆心为(200,200)半径为100的圆
+        mPaint.setColor(Color.GREEN);
+        canvas.drawCircle(200,200,100,mPaint);
+
+        //将原点移动到200,200
+        canvas.translate(200,200);
+
+        //移动之后(200,0)就相当于移动前，(400,200.)
+        mPaint.setColor(Color.parseColor("#ff00ff"));
+        canvas.drawCircle(200,0,100,mPaint);
     }
 
     @Override

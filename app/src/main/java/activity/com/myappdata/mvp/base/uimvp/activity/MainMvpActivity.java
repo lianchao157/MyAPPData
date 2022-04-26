@@ -79,11 +79,11 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
                         // 提交事务
                         transaction.commit();
 //                          fragment  嵌套fragment
-                        Drawable drawable = getResources().getDrawable(R.drawable.service_life_icon);
+//                        Drawable drawable = getResources().getDrawable(R.drawable.menu_contact_selected);
 //设置图片的大小
-                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+//                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 //在文本的右边设置图片
-                        home_rb_personalcenter.setCompoundDrawables(null, null, drawable, null);
+//                        home_rb_personalcenter.setCompoundDrawables(null, null, drawable, null);
 //                        原文链接：https://blog.csdn.net/wenzhi20102321/article/details/65937545
                         break;
                     case R.id.home_rb_search:
@@ -93,6 +93,9 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
                         transaction1.replace(R.id.home_frameLayout, mPlaceFragment);
                         // 提交事务
                         transaction1.commit();
+                        Drawable drawable1 = getResources().getDrawable(R.drawable.menu_find_selected);
+//设置图片的大小
+                        drawable1.setBounds(0, 0, drawable1.getMinimumWidth(), drawable1.getMinimumHeight());
                         break;
                     case R.id.home_rb_home:
                         mFragmentManager = getSupportFragmentManager();

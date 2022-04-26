@@ -58,9 +58,31 @@
                 android:layout_marginTop="10px"
                 android:background="@mipmap/icon_add"
                 android:text="武汉" />
-
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="160px"
+            android:layout_marginTop="10px">
+
+<!--            <activity.com.myappdata.uiutils.DrawGeometryView-->
+<!--                android:id="@+id/dgtv"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="60px"></activity.com.myappdata.uiutils.DrawGeometryView>-->
+        </RelativeLayout>
+
+        <activity.com.myappdata.uiutils.AndroidMenuView
+            android:id="@+id/menu_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            app:amv_color="@android:color/black"
+            app:amv_line_height="1dp" />
+        />
+
+        <!--        这里添加canvars 画图-->
+        <!--        <include layout="@layout/t"></include>-->
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refreshLayoutfindfragmetn"
             android:layout_width="match_parent"
@@ -80,6 +102,8 @@
                 app:srlClassicsSpinnerStyle="Translate" />
 
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <include layout="@layout/menum_main_layout" />
 
     </LinearLayout>
 
