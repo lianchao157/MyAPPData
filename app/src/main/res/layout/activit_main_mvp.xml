@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_buttom2"
+            android:background="@drawable/tab_main_find_selector"
             android:button="@null" />
 
         <RadioButton
@@ -42,7 +42,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_buttom2"
+            android:background="@drawable/tab_main_msg_selector"
             android:button="@null" />
 
         <RadioButton
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_buttom2"
+            android:background="@drawable/selector_icon_home"
             android:visibility="gone"
             android:button="@null" />
     </RadioGroup>

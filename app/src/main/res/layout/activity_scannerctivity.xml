@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mvp.base.uimvp.activity.scnner.Scannerctivity">
-<include
-    layout="@layout/layoutmytoobar"/>
 
     <cn.bingoogolapple.qrcode.zbar.ZBarView
+        android:id="@+id/zbarview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:qrcv_animTime="300"
@@ -38,7 +37,15 @@
         app:qrcv_tipTextSize="14sp"
         app:qrcv_toolbarHeight="40dp"
         app:qrcv_topOffset="80dp" />
-<!--    ————————————————-->
-<!--    版权声明：本文为CSDN博主「LBJFxd」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。-->
-<!--    原文链接：https://blog.csdn.net/fanxudonggreat/article/details/76595587-->
-</android.support.constraint.ConstraintLayout>
+
+    <include layout="@layout/layoutmytoobar" />
+    <TextView
+        android:id="@+id/projectNameTv"
+        android:layout_below="@+id/zbarview"
+        android:layout_width="wrap_content"
+        android:text="某某设施点"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        />
+</RelativeLayout>
