@@ -37,5 +37,11 @@
     <declare-styleable name="roundConner">
         <attr name="round" format="dimension" />
     </declare-styleable>
-
+<!--    自定义view-->
+    <declare-styleable name="AndroidMenuView">
+        <!-- 线的颜色 -->
+        <attr name="amv_color" format="color" />
+        <!-- 线高 -->
+        <attr name="amv_line_height" format="integer|float|dimension" />
+    </declare-styleable>
 </resources>
