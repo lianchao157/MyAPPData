@@ -8,8 +8,8 @@ import android.content.Context;
  * 时间：2017/12/19 15:44
  * 邮箱：MarkShuai@163.com
  * 意图：
+ * 21212
  */
-
 public class ShowVideoPresent<T> extends showVideoContract.Present<showVideoContract.View> {
 
     private Context mContext;

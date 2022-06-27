@@ -1,7 +1,6 @@
 package activity.com.myappdata.mvp.base.view;
 
 import java.util.List;
-
 public interface MainView {
 
     void showProgress();

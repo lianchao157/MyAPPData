@@ -15,12 +15,10 @@ public class CityModel {
     private int id;
     private String name;
 
-//    @Provides
     String provideName(){
         return name;
     }
 
-//    @Provides
     int provideid(){
         return id;
     }

@@ -1,5 +1,6 @@
 package activity.com.myappdata.mvp.base.uimvp.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -35,4 +36,5 @@ public abstract class BaseActivty_MVP_Activity extends AppCompatActivity {
      * @return
      */
     protected abstract int getLayoutResId();
+
 }

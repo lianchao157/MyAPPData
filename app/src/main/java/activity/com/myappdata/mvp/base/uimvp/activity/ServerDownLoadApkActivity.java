@@ -1,6 +1,5 @@
 package activity.com.myappdata.mvp.base.uimvp.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +11,6 @@ import activity.com.myappdata.mvp.base.Contract.SerViceUpLoadContract;
 import activity.com.myappdata.mvp.base.serviceupload.SerViceUpLoadPresent;
 import activity.com.myappdata.mvp.base.utilsmvp.LoadingDialog;
 import butterknife.BindView;
-
 public class ServerDownLoadApkActivity extends fengzhuangBaseActivity<SerViceUpLoadContract.View,
         SerViceUpLoadPresent<SerViceUpLoadContract.View>> implements SerViceUpLoadContract.View, View.OnClickListener {
 //    @BindView(R.id.bt_upload)

@@ -30,6 +30,7 @@ import activity.com.myappdata.mvp.base.modelmvp.entity.Province;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.UserinfoBywebData;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenter;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenterImpl.PlacePresenterImpl;
+import activity.com.myappdata.mvp.base.uimvp.activity.CropImageActivity;
 import activity.com.myappdata.mvp.base.uimvp.activity.GoodInfoTypeSelectActivity;
 import activity.com.myappdata.mvp.base.uimvp.activity.GoodsLineShowActivity;
 import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.PlaceAdapter;
@@ -38,6 +39,7 @@ import activity.com.myappdata.mvp.base.utilsmvp.LogUtils;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 import activity.com.myappdata.util.DialogUtil;
 import activity.com.myappdata.util.ToastUtil;
+import activity.com.myappdata.util.intentaction.IntentUtil;
 
 /**
  * https://zhuanlan.zhihu.com/p/45701880
@@ -57,6 +59,9 @@ public class MineFragment extends BaseFragment implements IProvinceCallbask, Vie
     private ImageView img_head;// 顶部的图片
     private static final String FILE_PATH = "/sdcard/syscamera.jpg";// 照片路径
     public  static   int OPEN_CANMER=99;
+
+    private  ImageView  img_setting;//  设置图片  目的图片剪裁
+
     @Override
     protected int getLayoutInflaterResId() {
         return R.layout.fragment_item_goods_config_info;
@@ -101,6 +106,8 @@ public class MineFragment extends BaseFragment implements IProvinceCallbask, Vie
 //        顶部图片裁剪
         img_head = (ImageView) rootView.findViewById(R.id.c1);
         img_head.setOnClickListener(this);
+        img_setting =(ImageView) rootView.findViewById(R.id.img_setting);
+        img_setting.setOnClickListener(this);
     }
 
     @Override
@@ -163,8 +170,8 @@ public class MineFragment extends BaseFragment implements IProvinceCallbask, Vie
                 });
 
                 break;
-            case 99:
-
+            case R.id.img_setting://  图片裁剪
+                IntentUtil.showIntent(MineFragment.this.getActivity(), CropImageActivity.class);
                 break;
         }
     }

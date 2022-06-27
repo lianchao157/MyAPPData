@@ -4,11 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -21,11 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -39,11 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import activity.com.myappdata.R;
-import activity.com.myappdata.activity.JingDontTypeActivity;
-import activity.com.myappdata.activity.UPdataBywebuserActivity;
 import activity.com.myappdata.adapter.fuzaadapter.base.Module;
-import activity.com.myappdata.entity.Beandata;
-import activity.com.myappdata.entity.DataBean;
 import activity.com.myappdata.entity.TestEntity;
 import activity.com.myappdata.jingdongtuijian.MyAdapter;
 import activity.com.myappdata.mvp.base.basemvp.BaseFragment;
@@ -51,21 +42,19 @@ import activity.com.myappdata.mvp.base.modelmvp.entity.Province;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.UserinfoBywebData;
 import activity.com.myappdata.mvp.base.mvp.interactor.FindItemsInteractor;
 import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenterImpl.MainPresenter;
-import activity.com.myappdata.mvp.base.uimvp.activity.ActivityManager;
 import activity.com.myappdata.mvp.base.uimvp.activity.ServerDownLoadApkActivity;
-import activity.com.myappdata.mvp.base.uimvp.activity.scnner.Scannerctivity;
 import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.MainAdapter;
 import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.PlaceAdapter;
+import activity.com.myappdata.mvp.base.utilsmvp.LoadingDialog;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 import activity.com.myappdata.mvp.base.view.MainView;
 import activity.com.myappdata.mvp.base.uimvp.fragment.hotfragmentpresenterimpl.HotfragmentpresentImple;
+import activity.com.myappdata.mvp.base.view.showmainactivity.searchview.SearchMvpActivity;
 import activity.com.myappdata.uiutils.ClockView;
-import activity.com.myappdata.uiutils.DrawGeometryView;
 import activity.com.myappdata.util.ActivitySkipUtil;
 import activity.com.myappdata.util.LogUtil;
 import activity.com.myappdata.util.ToastUtil;
 import butterknife.ButterKnife;
-
 /***
  * 1   https://www.pianshen.com/article/3470354071/  mvp
  *  代码
@@ -91,8 +80,9 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
     //    @InjectView(R.id.toolbar)
     public HotFFragment() {
     }
+
     @SuppressLint("HandlerLeak")
-     Handler mHandler = new Handler() {
+    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -104,6 +94,7 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
             }
         }
     };
+
     @Override
     protected int getLayoutInflaterResId() {
         return R.layout.fragment_hot;
@@ -115,6 +106,7 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
         btn_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                 当前的下载mvp
                 Intent i = new Intent(HotFFragment.this.getActivity(), ServerDownLoadApkActivity.class);
                 startActivity(i);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmssSSS");
@@ -134,19 +126,12 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
 
             }
         });
-//        provinceList.add(p);
-//        p1.setId(1);
-//        p1.setName("张三");
-//        provinceList.add(p1);
-//        provinceList.add(p);
-//        mPlaceAdapter = new PlaceAdapter(provinceList);
-////        mPlaceAdapter = new PlaceAdapter();
         imageViewscan = (ImageView) rootView.findViewById(R.id.iv_localcity);
         imageViewscan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.makeText(HotFFragment.this.getActivity(),"扫描");
-                ActivitySkipUtil.skipAnotherActivity(HotFFragment.this.getActivity(), Scannerctivity.class);
+                ToastUtil.makeText(HotFFragment.this.getActivity(), "扫描");
+                ActivitySkipUtil.skipAnotherActivity(HotFFragment.this.getActivity(), SearchMvpActivity.class);
             }
         });
         backgroundAlpha(1f);// 跳整屏幕亮度
@@ -154,7 +139,7 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
 
 //        画图
 
-        RelativeLayout layout=(RelativeLayout) rootView.findViewById(R.id.main);
+        RelativeLayout layout = (RelativeLayout) rootView.findViewById(R.id.main);
 //        layout.addView(new DrawGeometryView(HotFFragment.this.getActivity()));
         layout.addView(new ClockView(HotFFragment.this.getActivity()));// 时钟
 //        Paint mPaint = new Paint();
@@ -162,38 +147,27 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
 //                R.drawable.ic_launcher_background);
 //        canvas.drawBitmap(bitmap,100,50,mPaint);
 //        drawTranslate(canvas)；
+
+//         进度条
+        LoadingDialog.show(HotFFragment.this.getActivity());
+
+        EditText etinfo = (EditText) rootView.findViewById(R.id.etinfo);
+        String ed = etinfo.getText().toString().trim();
     }
 
-    private void drawTranslate(Canvas canvas){
-        Paint mPaint = new Paint();
-        mPaint.setColor(Color.BLUE);
-        mPaint.setStrokeWidth(4.0f);
-        mPaint.setTextSize(30f);
-        //初始的时候原点为(0,0)，画一个圆心为(200,200)半径为100的圆
-        mPaint.setColor(Color.GREEN);
-        canvas.drawCircle(200,200,100,mPaint);
-
-        //将原点移动到200,200
-        canvas.translate(200,200);
-
-        //移动之后(200,0)就相当于移动前，(400,200.)
-        mPaint.setColor(Color.parseColor("#ff00ff"));
-        canvas.drawCircle(200,0,100,mPaint);
-    }
 
     @Override
     protected void initPresenter() {
         // TODO: 创建 PlacePresenter 对象
         HotfragmentpresentImple = new HotfragmentpresentImple();
         HotfragmentpresentImple.registerViewCallback(this);
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-
-
     }
 
     @Override
@@ -211,44 +185,51 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
     public void showProgress() {
         progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.INVISIBLE);
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
     }
 
     @Override
     public void hideProgress() {
         progressBar.setVisibility(View.INVISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
     }
 
     @Override
     public void setItems(List<String> items) {
-
         recyclerView.setAdapter(new MainAdapter(items, presenter::onItemClicked));
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
 
     }
 
     @Override
     public void showMessage(String message) {
         LogUtil.d(TAG, "message" + message);
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
     }
 
 
     @Override
     public void onRefresh() {
         LogUtil.d(TAG, "onRefresh");
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
     }
 
     @Override
     public void updateList(int type, List<TestEntity.BodyBean.EListBean> datas) {
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
         LogUtil.d(TAG, "updateList" + datas.size());
     }
 
     @Override
     public void showLoading(String msg) {
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
         LogUtil.d(TAG, "showLoading" + msg);
     }
 
     @Override
     public void hideLoading() {
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
         LogUtil.d(TAG, "hideLoading");
     }
 
@@ -258,6 +239,7 @@ public class HotFFragment extends BaseFragment implements IProvinceCallbask, Mai
         LogUtil.d(TAG, "数据为null");
         String json = getJson(HotFFragment.this.getActivity(), "category.json");
         LogUtil.d(TAG, "json=============================================" + json);
+        LoadingDialog.dismiss(HotFFragment.this.getActivity());
     }
 
     @Override   // 创建适配器

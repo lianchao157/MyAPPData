@@ -4,6 +4,7 @@ import android.database.Observable;
 
 import activity.com.myappdata.bean.FindFragmentMenumBase;
 import activity.com.myappdata.bean.cash.VideoEntity;
+import activity.com.myappdata.mvp.base.view.showmainactivity.searchview.HotMenums;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -67,4 +68,5 @@ public interface VideoApi {
 // 获取 顶部菜单数据                                         ?menumtype
     @GET("/getTitleMenumdata")
     Call<FindFragmentMenumBase> getTitleMenumdata(@Query("type") String menumtype);
+
 }

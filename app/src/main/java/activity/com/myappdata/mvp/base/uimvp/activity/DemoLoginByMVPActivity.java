@@ -10,14 +10,14 @@ import activity.com.myappdata.mvp.base.Contract.MainContract;
 import activity.com.myappdata.mvp.base.serviceupload.MainPresent;
 import activity.com.myappdata.util.ToastUtils;
 
-public class DemoLoginByMVPActivity extends  fengzhuangBaseActivity<MainContract.View, MainPresent<MainContract.View>> implements MainContract.View{
+public class DemoLoginByMVPActivity extends fengzhuangBaseActivity<MainContract.View, MainPresent<MainContract.View>> implements MainContract.View {
 
     private Button btn_mvpdatateset;//  按键测试
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_demo_login_by_mvp);
-        btn_mvpdatateset= (Button) findViewById(R.id.btn_mvpdatateset);
+        btn_mvpdatateset = (Button) findViewById(R.id.btn_mvpdatateset);
         btn_mvpdatateset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,20 +64,19 @@ public class DemoLoginByMVPActivity extends  fengzhuangBaseActivity<MainContract
 
     @Override
     public void logInOk(String str) {
-        ToastUtils.show(DemoLoginByMVPActivity.this,str);
+        ToastUtils.show(DemoLoginByMVPActivity.this, str);
         btn_mvpdatateset.setText(str);
     }
 
     @Override
     public void logInError(String code) {
-        ToastUtils.show(DemoLoginByMVPActivity.this,code);
+        ToastUtils.show(DemoLoginByMVPActivity.this, code);
     }
 
     @Override
     public void showDialog() {
 
     }
-
 
 
     @Override

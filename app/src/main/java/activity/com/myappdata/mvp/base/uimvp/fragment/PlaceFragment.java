@@ -20,7 +20,7 @@ import activity.com.myappdata.mvp.base.uimvp.adpter_mvp.PlaceAdapter;
 import activity.com.myappdata.mvp.base.utilsmvp.LogUtils;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 
-/**
+/**android高级页面效果集锦
  * https://zhuanlan.zhihu.com/p/45701880
  */
 public class PlaceFragment extends BaseFragment implements IProvinceCallbask {

@@ -31,13 +31,6 @@ public class MIVActivity extends AppCompatActivity implements IView {
         setContentView(R.layout.activity_miv);
         //实例化Presenter，并将实现了IView接口的类传入进去
         mPresenter = new Presenter(MIVActivity.this);
-
-//        mBtnShowToast = findViewById(R.id.btn_show_toast);
-//        mText = findViewById(R.id.text);
-
-//        mBtnShowToast.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
         //通过Presenter来实现业务逻辑操作，View层只负责UI相关操作
         mPresenter.loadData();
         System.out.print("");

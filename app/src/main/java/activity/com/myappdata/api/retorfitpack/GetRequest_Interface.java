@@ -8,6 +8,7 @@ import activity.com.myappdata.entity.Beandata;
 import activity.com.myappdata.entity.ShopCarInfoenTity;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.MVPRoot;
 import activity.com.myappdata.mvp.base.modelmvp.mvploginentity.mvpuserinfolitit.MVPUserInfo;
+import activity.com.myappdata.mvp.base.view.showmainactivity.searchview.HotMenums;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -20,7 +21,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
-
 public interface GetRequest_Interface {
     @GET("/selectall/")
     Call<Root> selectall();
@@ -90,4 +90,8 @@ public interface GetRequest_Interface {
     // 通过post 方式获取数据
     @POST("/getTitleMenumdata")
     Call<ShopCarInfoenTity> getDataByPost(@Query("type") ShopCarInfoenTity mShopCarInfoenTity);
+
+    @GET("/GetHotMenums")
+    Call<HotMenums> GetHotMenums();
+
 }

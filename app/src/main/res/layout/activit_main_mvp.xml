@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_buttom2"
+            android:background="@drawable/tab_main_me_selector"
             android:button="@null" />
 
         <RadioButton
@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/main_buttom2"
+            android:background="@drawable/tab_main_me_selector"
             android:visibility="gone"
             android:button="@null" />
 

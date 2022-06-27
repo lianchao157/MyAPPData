@@ -41,7 +41,7 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
     private FrameLayout home_frameLayout;
     public UserInfoByLogin user = new UserInfoByLogin();
 //    通过application  判断是否需要登陆
-
+    private final static String TAG = MainMvpActivity.class.getSimpleName();
     private MyApplication myapplication;
 
     @Override
@@ -103,20 +103,8 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
                         minPagetransaction.replace(R.id.home_frameLayout, mineFragment);
                         minPagetransaction.commit();
                         break;
-//                    case R.id.home_rb_map:
-//                        FragmentManager mapmanager = getFragmentManager();
-//                        FragmentTransaction maptransaction = mapmanager.beginTransaction();
-//                        MapFragment mapFragment = new MapFragment();
-//                        maptransaction.replace(R.id.home_frameLayout, mapFragment, "mapFragment");
-//                        maptransaction.commit();
-//                        break;
-//                    case R.id.home_rb_more:
-//                        FragmentManager moremanager = getFragmentManager();
-//                        FragmentTransaction moretransaction = moremanager.beginTransaction();
-//                        MoreFragment moreFragment = new MoreFragment();
-//                        moretransaction.replace(R.id.home_frameLayout, moreFragment, "moreFragment");
-//                        moretransaction.commit();
-//                        break;
+                    case R.id.home_rb_map:
+                        break;
                 }
             }
         });
@@ -129,13 +117,6 @@ public class MainMvpActivity extends BaseActivty_MVP_Activity {
     }
 
     private void initFragment() {
-//        // 获得fragmentManager
-//        mFragmentManager = getSupportFragmentManager();
-//        // 开启事务
-//        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-//        transaction.add(R.id.home, mPlaceFragment);
-//        // 提交事务
-//        transaction.commit();
 
 
         Retrofit retrofit = new Retrofit.Builder()

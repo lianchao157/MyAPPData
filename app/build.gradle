@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'robust'
+//apply plugin: 'robust'
 //apply plugin: 'com.neenbedankt.android-apt'
 //apply plugin: 'com.neenbedankt.android-apt'
 
@@ -20,17 +20,69 @@ android {
         versionCode 2
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        flavorDimensions "2" // 维度是版本号这样就统一维度
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath = true
             }
         }
     }
+    signingConfigs {
+        release{
+            storeFile file("D:/savejksfiel/myappdata.jks")
+            storePassword '123456'
+            keyAlias 'key0'
+            keyPassword '123456'
+        }
+        debugConfig {
+            storeFile file("D:/savejksfiel/myappdata.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            // 自定义输出配置
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (variant.buildType.name == 'release') {
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为JPay_0.0.1_xiaomi.apk
+                        def fileName = "JPay_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                        output = fileName
+                    }
+                    }else{
+                        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                            // 输出apk名称为JPay_0.0.1_xiaomi.apk
+                            def fileName = "JPay_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+                            output = new File(outputFile.parent, fileName)
+
+
+                        }
+                    }
+                }
+            }
         }
+        debug {
+            signingConfig signingConfigs.debugConfig
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    //多渠道打包
+    productFlavors {
+        xiaomi {}
+        baidu {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
     }
     compileOptions {
         sourceCompatibility 1.8
@@ -45,6 +97,15 @@ android {
 //            url 'http://oss.jfrog.org/artifactory/oss-snapshot-local'
 //        }
 //    }
+//多渠道打包
+    productFlavors {
+        xiaomi {
+            manifestPlaceholders = [CHANNEL_VALUE: "xiaomi"]
+        }
+        baidu {
+            manifestPlaceholders = [CHANNEL_VALUE: "baidu"]
+        }
+    }
 
 }
 repositories {
@@ -91,8 +152,10 @@ dependencies {
     implementation 'com.android.support:design:23.3.0'
     implementation 'com.android.support:support-v4:23.3.0'
 //    implementation 'com.android.support:cardview-v7:23.0.+'
-    implementation 'com.jakewharton:butterknife:8.4.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+//    implementation 'com.jakewharton:butterknife:8.4.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    implementation 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     implementation 'com.facebook.fresco:fresco:0.9.0'
     implementation 'com.gxz.pagerslidingtabstrip:library:1.3'
     implementation 'com.bigkoo:convenientbanner:2.0.5'
@@ -252,4 +315,11 @@ dependencies {
 //     用这个
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.zxing:core:3.3.0'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+//图片裁剪框架
+//     api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+//    implementation 'com.theartofdev.edmodo:android-image-cropper:2.6.+'
+//
+//    implementation 'com.github.bumptech.glide:glide:4.11.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

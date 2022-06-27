@@ -26,7 +26,6 @@ import activity.com.myappdata.mvp.base.presentermvp.IPlacePresenter;
 import activity.com.myappdata.mvp.base.utilsmvp.Constants;
 import activity.com.myappdata.mvp.base.view.IProvinceCallbask;
 import activity.com.myappdata.util.LogUtil;
-//import io.reactivex.schedulers.Schedulers;
 
 //项目地址
 //        D:\Cenlent_Code\项目\downloadAndroid\AndroidMVPObject-master\AndroidMVPObject-master\app\src\main\java\com\markshuai\androidmvpobject\apkupload

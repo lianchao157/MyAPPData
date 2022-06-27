@@ -36,6 +36,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="42dp"
                 android:background="@drawable/buttom_selector_bg"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
                 android:hint="请输入要查询内容"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
@@ -66,16 +68,16 @@
             android:layout_height="160px"
             android:layout_marginTop="10px">
 
-<!--            <activity.com.myappdata.uiutils.DrawGeometryView-->
-<!--                android:id="@+id/dgtv"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="60px"></activity.com.myappdata.uiutils.DrawGeometryView>-->
+            <!--            <activity.com.myappdata.uiutils.DrawGeometryView-->
+            <!--                android:id="@+id/dgtv"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="60px"></activity.com.myappdata.uiutils.DrawGeometryView>-->
         </RelativeLayout>
 
         <activity.com.myappdata.uiutils.AndroidMenuView
             android:id="@+id/menu_view"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:amv_color="@android:color/black"
             app:amv_line_height="1dp" />
