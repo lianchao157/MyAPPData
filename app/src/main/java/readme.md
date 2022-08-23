@@ -48,3 +48,11 @@ https://www.meiwen.com.cn/subject/tboagttx.html
 1百度地图 复杂性
 2 打包问题解决
 3 mvp 书写  10%
+
+
+进度条
+Android-SpinKit 进度条 
+
+   attrs.xml文件
+
+    所有自定义属性需要在文件中添加declare-styleable节点来声明，例如定义属性background_color设置背景色。

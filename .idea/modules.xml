@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MyAppData.iml" filepath="$PROJECT_DIR$/MyAppData.iml" group="MyAppData" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="MyAppData/app" />
       <module fileurl="file://$PROJECT_DIR$/cmlibrary/cmlibrary.iml" filepath="$PROJECT_DIR$/cmlibrary/cmlibrary.iml" group="MyAppData/cmlibrary" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mylibrary/mylibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/mylibrary/mylibrary.iml" group="MyAppData/mylibrary" />
     </modules>
   </component>
 </project>

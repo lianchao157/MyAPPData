@@ -44,4 +44,9 @@
         <!-- 线高 -->
         <attr name="amv_line_height" format="integer|float|dimension" />
     </declare-styleable>
+
+
+    <declare-styleable name="EmptyLayout">
+        <attr name="background_color" format="color"/>
+    </declare-styleable>
 </resources>

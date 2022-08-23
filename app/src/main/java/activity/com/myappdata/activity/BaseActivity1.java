@@ -2,10 +2,10 @@ package activity.com.myappdata.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-
+import android.support.v4.app.Fragment;
 import activity.com.myappdata.fragment.BaseFragment;
 
-public abstract class BaseActivity1 extends AppCompatActivity {
+public     abstract          class BaseActivity1 extends AppCompatActivity {
 
     //布局文件ID
     protected abstract int getContentViewId();

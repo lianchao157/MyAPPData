@@ -17,10 +17,8 @@ import activity.com.myappdata.mvp.base.modelmvp.entity.UserInfoByLogin;
 import activity.com.myappdata.mvp.base.uimvp.fragment.HotFFragment;
 import activity.com.myappdata.mvp.base.uimvp.fragment.MineFragment;
 import activity.com.myappdata.mvp.base.uimvp.fragment.PlaceFragment;
-import activity.com.myappdata.mvvm.ui.MvvmUiActivity;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 /**
  * mvpi显示的activity 的代码
  */

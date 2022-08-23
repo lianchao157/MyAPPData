@@ -12,14 +12,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.base.view.showmainactivity.searchview.SearchMvpActivity">
+        <activity android:name=".mvpprgrom.HomeActivity"></activity>
+        <activity
+            android:name=".mvp.base.view.showmainactivity.searchview.SearchMvpActivity"
+            android:windowSoftInputMode="stateAlwaysHidden | adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-<!--        //mvpdemo-->
+        </activity> <!-- //mvpdemo -->
         <activity android:name=".mvp.base.view.showmainactivity.showtviedeo.ShowvideActivity" /> <!-- 图片裁剪 -->
         <activity android:name=".mvp.base.uimvp.activity.CropImageActivity" /> <!-- 底部导航框架 -->
         <activity android:name=".activity.tabchange.TabActivity">
@@ -71,19 +73,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".mvp.base.uimvp.activity.BaseActivty_MVP_Activity" />
-        <activity android:name=".mvp.base.uimvp.activity.MainMvpActivity">
-
-
-
-
-
-
-
-
-
-
-
-        </activity>
+        <activity android:name=".mvp.base.uimvp.activity.MainMvpActivity"></activity>
         <activity android:name=".mvvm.ui.MvvmUiActivity" />
         <activity android:name=".activity.FuZaBuJuActivity" />
         <activity android:name=".activity.ManyRecycleviewTitleActivity" />
@@ -176,9 +166,10 @@
             android:enabled="true"
             android:exported="true" />
     </application>
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 推送时加入权限 -->
+    <uses-feature android:name="android.hardware.camera" /> <!-- 推送时加入权限 -->
     <!-- Required -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -188,9 +179,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Optional. Required for location feature -->
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="com.hbapp.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
@@ -198,23 +189,23 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 侧边球状的图 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 侧边球状的图 -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 6.0动态权限代码 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 6.0动态权限代码 -->
     <!-- 危险权限 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 一般权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 一般权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 震动权限 -->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 摄像头权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" /> <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 摄像头权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
