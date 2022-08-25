@@ -26,6 +26,11 @@ android {
                 includeCompileClasspath = true
             }
         }
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+        }
+        multiDexEnabled true
     }
     signingConfigs {
         release{
@@ -110,7 +115,12 @@ android {
 //            manifestPlaceholders = [CHANNEL_VALUE: "baidu"]
 //        }
 //    }
+sourceSets{
+    main{
 
+      jniLibs.srcDirs=['libs']
+    }
+}
 }
 repositories {
     maven { url "https://jitpack.io" }
@@ -348,4 +358,28 @@ dependencies {
 //    compile "com.android.support:multidex:1.0.2"
 //    //tinker的核心库
 //    compile("com.tencent.tinker:tinker-android-lib:1.7.7") { changing = true }
+
+//    2022/8/24  高德地图引用
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+//    D地图
+
+//    compile 'com.amap.api:3dmap:latest.integration'
+
+//    2D地图
+
+//    compile 'com.amap.api:map2d:latest.integration'
+
+//    导航
+//
+//    compile 'com.amap.api:navi-3dmap:latest.integration'
+
+//    搜索
+
+//    compile 'com.amap.api:search:latest.integration'
+
+//    定位
+
+//    compile 'com.amap.api:location:latest.integration'
 }

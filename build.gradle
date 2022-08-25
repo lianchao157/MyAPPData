@@ -8,10 +8,11 @@ buildscript {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
 
-
+//3.1.2   4.6
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+//        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath "com.tencent.tinker:tinker-patch-gradle-plugin:1.7.7"
 

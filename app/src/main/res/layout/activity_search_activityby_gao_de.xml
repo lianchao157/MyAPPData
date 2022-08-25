@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SearchActivitybyGaoDe">
+
+        <LinearLayout
+            android:id="@+id/line_search"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <activity.com.myappdata.widget.ClearEditText
+                android:maxLines="1"
+                android:id="@+id/edit_search"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:hint="@string/search_hint" />
+            <Button
+                android:id="@+id/bt_search"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="#d6d7d7"
+                android:text="search_ack"
+                android:layout_marginEnd="5dp" />
+
+            <Button
+                android:id="@+id/bt_pre"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="#d6d7d7"
+                android:layout_marginEnd="5dp"
+                android:text="search_pre" />
+            <Button
+                android:id="@+id/bt_next"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="#d6d7d7"
+                android:text="search_next" />
+
+
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/lv_poi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:divider="#e1dddd"
+            android:dividerHeight="5dp"
+            android:layout_below="@id/line_search" />
+
+    </RelativeLayout>

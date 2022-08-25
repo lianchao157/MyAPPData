@@ -1259,3 +1259,7 @@ retorfitnetutisl  封装使用
 
     自定义view
     https://github.com/lygttpod/AndroidCustomView.git
+
+
+    三方登陆
+    https://github.com/yxq5333/HiddenDanger-tools/blob/16ff4f4c2d5be50937744af5a9980fca9d39d832/HiddenDanger-master/src/main/java/com/xhtt/hiddendangermaster/wxapi/WXEntryActivity.java
