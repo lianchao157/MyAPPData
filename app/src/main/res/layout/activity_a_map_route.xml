@@ -9,30 +9,33 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="128dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/img_transit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_telphone_32"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_alipay_72" />
 
         <ImageView
             android:id="@+id/img_driving"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_telphone_32"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_alipay_72" />
 
         <ImageView
             android:id="@+id/img_walk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_telphone_32"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/icon_alipay_72" />
 
     </LinearLayout>
 
-    <MapView
+    <com.amap.api.navi.AMapNaviView
 
         android:id="@+id/navi_map"
 
