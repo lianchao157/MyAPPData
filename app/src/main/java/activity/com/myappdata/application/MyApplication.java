@@ -4,8 +4,7 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 
-import activity.com.myappdata.mvp.base.AppModule;
-import activity.com.myappdata.mvp.base.modelmvp.AppServiceModule;
+
 import activity.com.myappdata.mvp.base.modelmvp.entity.UserInfoByLogin;
 import activity.com.myappdata.server.CrashHandler;
 import activity.com.myappdata.util.networkutils.NetworkListener;
@@ -25,6 +24,13 @@ public class MyApplication extends Application {
     private Context mContext;
     private static MyApplication instance;
 
+
+
+
+
+    public static MyApplication getInstance() {
+        return instance;
+    }
 //    mvp模式下
 //    private AppComponent appComponent;
 
@@ -66,6 +72,9 @@ public class MyApplication extends Application {
 //    }
 
     public static Context getMyApplication() {
+        if (instance==null){
+
+        }
         return instance;
     }
     public static MyApplication getContext() {
