@@ -3,7 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="activity.com.myappdata"
     android:versionCode="2"
-    android:versionName="1.1">
+    android:versionName="1.1" >
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" /> <!-- 侧边球状的图 -->
+    <uses-permission android:name="com.hbapp.permission.JPUSH_MESSAGE" /> <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 6.0动态权限代码 -->
+    <!-- 危险权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 一般权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 震动权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 摄像头权限 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 高德地图显示20228.24 -->
+    <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" /> <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" /> <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,20 +67,27 @@
         android:icon="@mipmap/fishi"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivitybyGaoDe"></activity>
-        <activity android:name=".AMapRouteActivity" />
-        <activity android:name=".GaoDeMapActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".weixin.WeixinAPIActivity" >
+        </activity>
+        <activity android:name=".MaPGaoDeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RouteNaviActivity" />
+        <activity android:name=".DaohangActivity" >
+        </activity> <!-- 官网上的demmo -->
+        <activity android:name=".BusRouteDetailActivity" /> <!-- g高德地图规划路线 -->
+        <activity android:name=".SearchActivitybyGaoDe" />
+        <activity android:name=".AMapRouteActivity" /> <!-- 地图定位 -->
+        <activity android:name=".GaoDeMapActivity" />
         <activity android:name=".mvpprgrom.HomeActivity" />
         <activity
             android:name=".mvp.base.view.showmainactivity.searchview.SearchMvpActivity"
-            android:windowSoftInputMode="stateAlwaysHidden | adjustPan">
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -35,7 +98,7 @@
         </activity>
         <activity android:name=".mvp.base.view.showmainactivity.showtviedeo.ShowvideActivity" />
         <activity android:name=".mvp.base.uimvp.activity.CropImageActivity" /> <!-- //mvpdemo -->
-        <activity android:name=".activity.tabchange.TabActivity">
+        <activity android:name=".activity.tabchange.TabActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -53,8 +116,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".MenumActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.JingDongShouyeActivity" />
-        <activity android:name=".activity.BaseActivity1" />
+        <activity android:name=".activity.JingDongShouyeActivity" /> <!-- <activity android:name=".activity.BaseActivity1" /> -->
         <activity android:name=".activity.SelectMenuActivity" />
         <activity android:name=".activity.TesetBaseActivity" />
         <activity android:name=".activity.ChangeTypeActivity" />
@@ -64,16 +126,8 @@
         <activity android:name=".activity.VideoActivity" />
         <activity android:name=".activity.GuideFirstActivity" />
         <activity android:name=".activity.MainTestActivity" /> <!-- 销量排序页面 -->
-        <activity android:name=".activity.CashInfoActivity" />
-        <activity android:name=".activity.JingDongTypeAllActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".activity.CashInfoActivity" /> <!-- 分类选择 -->
+        <activity android:name=".activity.JingDongTypeAllActivity" />
         <activity android:name=".mvp.base.uimvp.activity.BaseActivty_MVP_Activity" /> <!-- 启动开启服务要写入运行日志 -->
         <!-- <service -->
         <!-- android:name="activity.com.myappdata.widgets.MyLogcat" -->
@@ -91,18 +145,9 @@
         <activity android:name=".activity.UPVersionActivity" />
         <activity android:name=".activity.TestActivity" />
         <activity android:name=".mvp.base.uimvp.activity.MVP_LoginActivity" />
-        <activity android:name=".mvp.base.uimvp.activity.fengzhuangBaseActivity" />
-        <activity android:name=".mvp.base.uimvp.activity.ServerDownLoadApkActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-
-        </activity>
-        <activity android:name=".mvp.base.uimvp.activity.GoodInfoTypeSelectActivity">
+        <activity android:name=".mvp.base.uimvp.activity.fengzhuangBaseActivity" /> <!-- 下载apk***** -->
+        <activity android:name=".mvp.base.uimvp.activity.ServerDownLoadApkActivity" />
+        <activity android:name=".mvp.base.uimvp.activity.GoodInfoTypeSelectActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -111,7 +156,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".activity.JingshouyeActivity">
+        <activity android:name=".activity.JingshouyeActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -120,7 +165,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".MVPEaily.view.MIVActivity">
+        <activity android:name=".MVPEaily.view.MIVActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -132,7 +177,7 @@
         <activity android:name=".mvp.base.uimvp.activity.GoodsLineShowActivity" /> <!-- mvp  测试 -->
         <activity android:name=".mvp.base.uimvp.activity.DemoLoginByMVPActivity" />
         <activity android:name=".activity.KuaishouLayCopyActivity" /> <!-- 商品种类选择自定义 -->
-        <activity android:name=".activity.TwoLevelMenumActivity">
+        <activity android:name=".activity.TwoLevelMenumActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -141,7 +186,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity> <!-- 下载暗转的服务 -->
-        <activity android:name=".activity.UPdataBywebuserActivity">
+        <activity android:name=".activity.UPdataBywebuserActivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -151,7 +196,7 @@
             <!-- </intent-filter> -->
         </activity> <!-- 测试专用的代码 无实际意义 -->
         <activity android:name=".activity.SearchInfoActivity" />
-        <activity android:name=".activity.changperssionactivity">
+        <activity android:name=".activity.changperssionactivity" >
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -183,61 +228,5 @@
             android:enabled="true"
             android:exported="true" />
     </application>
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-
-    <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Optional. Required for location feature -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-    <uses-permission android:name="com.hbapp.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 侧边球状的图 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 网络状态 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 6.0动态权限代码 -->
-    <!-- 危险权限 -->
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" /> <!-- 一般权限 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 网络权限 -->
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" /> <!-- 震动权限 -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- 摄像头权限 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- 高德地图显示20228.24 -->
-    <!-- 允许程序打开网络套接字 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序设置内置sd卡的写权限 -->
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 允许程序获取网络状态 -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- 允许程序访问WiFi网络信息 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序读写手机状态和身份 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>
