@@ -34,12 +34,12 @@ import activity.com.myappdata.util.LogUtil;
 
 /***
  * 使用微信进行登陆   引用依赖
- *
+ *11111
  *     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
  *     /*debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
  */
 public class   WeixinAPIActivity    extends Activity  implements IWXAPIEventHandler {
-    private static String TAG = "MicroMsg.WXEntryActivity";
+    private static String TAG = "MicroMsg.WXEntryActivity"; ///打印log
 
     private IWXAPI api;
     private MyHandler handler;
