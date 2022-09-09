@@ -56,3 +56,53 @@ Android-SpinKit 进度条
    attrs.xml文件
 
     所有自定义属性需要在文件中添加declare-styleable节点来声明，例如定义属性background_color设置背景色。
+    
+    
+    
+    
+  MD5: 87:74:9C:14:70:D6:33:D1:8A:48:74:0E:ED:75:55:6E
+           SHA1: FE:33:BD:5B:38:50:3A:B8:D0:D3:1C:BE:73:E5:5E:F3:7F:9E:8D:E4
+           SHA256: 1C:0B:F7:E2:4F:7B:C1:51:BC:41:1C:C8:67:F8:B5:47:07:06:4C:5F:E0:7A:A2:53:DE:30:37:AA:3B:E5:5A:3D
+           签名算法名称: SHA256withRSA
+           版本: 3  
+           
+           
+            MD5: 87:74:9C:14:70:D6:33:D1:8A:48:74:0E:ED:75:55:6E
+                    SHA1: FE:33:BD:5B:38:50:3A:B8:D0:D3:1C:BE:73:E5:5E:F3:7F:9E:8D:E4
+                    SHA256: 1C:0B:F7:E2:4F:7B:C1:51:BC:41:1C:C8:67:F8:B5:47:07:06:4C:5F:E0:7A:A2:53:DE:30:37:AA:3B:E5:5A:3D
+                    签名算法名称: SHA256withRSA
+                    版本: 3
+                    
+                    
+                    myAppData-测试	607e906be14d8620f7589b7d39d0d093	—	Android平台	设置
+                    
+                    keytool -v -list -keystore D:\savejksfiel\myappdata.jks
+               线上版本打包   **********************************************************************
+                    
+                     MD5: 17:C3:A7:75:8A:56:82:30:38:EF:FC:43:22:DE:11:83
+                             SHA1: ED:59:50:00:DE:D0:1C:A1:D7:60:73:CE:5E:77:DA:B9:B4:FF:05:4E
+                             SHA256: C2:EB:23:77:EB:AE:EF:68:62:80:A7:FF:42:CC:44:82:F1:97:FC:1A:98:D5:87:DE:DB:13:7D:5B:E4:96:7C:2D
+                             签名算法名称: SHA256withRSA
+                             版本: 3
+                             
+                             
+                             生成的key值    
+                             
+                             607e906be14d8620f7589b7d39d0d093
+
+    
+    
+    生成sha1 的值的方法
+    https://blog.csdn.net/afufufufu/article/details/122565720
+    
+    第一步
+    点击Terminal
+    在这里插入图片描述
+    第二步
+    输入下面语句
+    E:\Android\text.jks 是你密钥的地址路径
+    keytool -v -list -keystore E:\Android\text.jks
+    
+    高德地图
+    
+    https://lbs.amap.com/demo/sdk/traffic-transfer#android

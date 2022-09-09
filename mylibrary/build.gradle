@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
 
+configurations {
+    all*.exclude group: 'com.android.support', module: 'support-v4'
+}
 android {
     compileSdkVersion 30
     buildToolsVersion "31.0.0"
@@ -20,6 +23,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets{
+        main{
+
+            jniLibs.srcDirs=['libs']
+        }
+    }
 }
 
 dependencies {
@@ -29,4 +38,34 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:support-v4:23.3.0'
+    //    2022/8/24  高德地图引用
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+//    D地图
+
+//    compile 'com.amap.api:3dmap:latest.integration'
+
+//    2D地图
+
+    compile 'com.amap.api:map2d:latest.integration'
+
+//    导航
+//
+//    compile 'com.amap.api:navi-3dmap:latest.integration'
+
+//    搜索
+
+    compile'com.amap.api:search:latest.integration'
+//    定位
+
+//    compile 'com.amap.api:location:latest.integration'
+
+
+//    compile 'com.amap.api:3dmap:latest.integration'
+    compile 'com.amap.api:location:latest.integration'
+
+    //  二位码的依赖
+    compile  'cn.yipianfengye.android:zxing-library:2.1'
+
 }
