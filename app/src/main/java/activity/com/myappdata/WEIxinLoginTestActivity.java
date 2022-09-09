@@ -2,7 +2,7 @@ package activity.com.myappdata;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+//1111111111
 public class WEIxinLoginTestActivity extends AppCompatActivity {
 
     @Override
